@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BABY BEAR - Thế giới đồ chơi cho bé</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/bootstrap.min.css">
+  <script src="./js/jquery-3.7.1.min.js"></script>
+  <script src="./js/main.js"></script>
+</head>
+<body>
+  <header>
+    <!--thanh thông tin trên cùng-->
+    <div class="top-bar">
+      <div class="location">
+        <span>📍 Xem tồn kho, giá bán tại:</span>
+        <select>
+          <option>Miền Bắc</option>
+          <option>Miền Trung</option>
+          <option>Miền Nam</option>
+        </select>
+      </div>
+      <div class="top-links">
+        <a href="#">Hotline: 1800.0081</a> |
+        <a href="#">Zalo cửa hàng</a> |
+        <a href="#">Ưu đãi khi tải app</a> |
+        <a href="#">Thưởng Kicoin</a>
+      </div>
+    </div>
+
+    <!--logo, thanh tìm kiếm, các biểu tượng-->
+    <div class="header-top">
+        <div class="logo">
+          <img src="./img/logo2.png" alt="BABY BEAR Logo">
+        </div>
+
+        <div class="search-bar">
+          <input type="text" placeholder="Ba mẹ tìm kiếm gì cho con hôm nay">
+          <button type="submit"><a></a>🔍</button>
+        </div>
+
+        <div class="header-icons">
+          <a href="#">🛍️ Lịch sử đơn hàng</a>
+          <a href="./register.html">👤 Tài khoản</a>
+          <a href="./cart.html">🛒 Giỏ hàng</a>
+        </div>
+    </div>
+
+    <!--menu-->
+    <nav class="main-menu">
+      <ul>
+        <li><a href="index.html">Trang chủ</a></li>
+        <li><a href="./products.html">Sản phẩm</a></li>
+        <li><a href="./new.html">Tin tức</a></li>
+        <li><a href="./about.html">Về chúng tôi</a></li>
+        <li><a href="./hangmoi.html">Hàng mới</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!--ss-->
+  <div class="intro-banner-container">
+    <section class="introduction">
+      <div class="left-section">
+        <img src="./img/bannertrai.png" class="icon" alt="Bear Icon" width="350px">
+        <h2 class="typing">Chào Mừng Đến Với Baby Bear!</h2>
+        <p class="welcome-message">"Baby Bear - người bạn đồng hành tin cậy cho phụ huynh và trẻ nhỏ."</p>
+        <a href="#products" class="shop-button">Khám Phá Ngay</a>
+    </div>
+      
+    </section>
+
+    <!--Banner-->
+    <div class="slider">
+      <div class="slides">
+          <div class="slide">
+              <img src="./img/BN1.png" alt="Slide 1">
+          </div>
+          <div class="slide">
+              <img src="./img/BN2.png" alt="Slide 2">
+          </div>
+          <div class="slide">
+              <img src="./img/BN3.png" alt="Slide 3">
+          </div>
+          <div class="slide">
+            <img src="./img/BN4.png" alt="Slide 3">
+        </div>
+      </div>
+
+      <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
+      <button class="next" onclick="moveSlide(1)">&#10095;</button>
+
+      <div class="dots">
+          <span class="dot" onclick="currentSlide(1)"></span>
+          <span class="dot" onclick="currentSlide(2)"></span>
+          <span class="dot" onclick="currentSlide(3)"></span>
+          <span class="dot" onclick="currentSlide(4)"></span>
+      </div>
+  </div>
+
+  </div>
+    <!--Top 10 sản phẩm bán chạy -->
+    <section class="best-sellers">
+      <h2>Top 10 Sản Phẩm Bán Chạy</h2>
+      <div class="product-list" id="productList">
+
+        <div class="product" data-id="10698">
+          <img src="./img/sp1.webp" alt="Sản phẩm 1">
+          <div class="product-info">
+            <span class="discount">-40%</span>
+            <h3>LEGO CLASSIC</h3>
+            <div class="p">
+              <p>Đồ Chơi Lắp Ráp Thùng Gạch Lớn Classic Sáng Tạo LEGO CLASSIC 10698</p>
+            </div>
+            <div class="parent"><span class="sku">SKU: 10698</span></div>
+            <div class="price">
+              <span class="old-price">1.920.000₫</span>
+              <span class="new-price">1.248.000₫</span>
+            </div>
+            <button class="add-to-cart">Thêm Vào Giỏ Hàng</button>
+            <button class="favorite-button">&#9825;</button>
+          </div>
+        </div>
+    
+        <div class="product" data-id="BK1105">
+          <img src="./img/sp2.webp" alt="Sản phẩm 2">
+          <div class="product-info">
+            <span class="discount">-50%</span>
+            <h3>CLEVERHIPPO</h3>
+            <p>Ba Lô Fancy - Ban Nhạc Tinh Nghịch CLEVERHIPPO BK1105</p>
+            <div class="parent"><span class="sku">SKU: BK1105</span></div>
+            <div class="price">
+              <span class="old-price">644.000₫</span>
+              <span class="new-price">322.000₫</span>
+            </div>
+            <button class="add-to-cart">Thêm Vào Giỏ Hàng</button>
+            <button class="favorite-button">&#9825;</button>
+          </div>
+        </div>
+        
+        <div class="product" data-id="505005">
+          <img src="./img/sp3.webp" alt="Sản phẩm 3">
+          <div class="product-info">
+            <span class="discount">-40%</span>
+            <h3>MINIFORCE</h3>
+            <p>Robot Siêu Cảnh Sát Bầu Trời Jet Cop Phong Năng Miniforce 505005</p>
+            <div class="parent"><span class="sku">SKU: 505005</span></div>
+            <div class="price">
+              <span class="old-price">479.000₫</span>
+              <span class="new-price">287.000₫</span>
+            </div>
+            <button class="add-to-cart">Thêm Vào Giỏ Hàng</button>
+            <button class="favorite-button">&#9825;</button>
+          </div>
+        </div>
+    
+        <div class="product" data-id="PAB044">
+          <img src="./img/sp4.webp" alt="Sản phẩm 4">
+          <div class="product-info">
+            <span class="discount">-50%</span>
+            <h3>PEEK A BOO</h3>
+            <p>Đồ chơi STEAM xếp hình nam châm với vòng xoay-109 PEEK A BOO PAB044</p>
+            <div class="parent"><span class="sku">SKU: PAB044</span></div>
+            <div class="price">
+              <span class="old-price">860.000₫</span>
+              <span class="new-price">420.000₫</span>
+            </div>
+            <button class="add-to-cart">Thêm Vào Giỏ Hàng</button>
+            <button class="favorite-button">&#9825;</button>
+          </div>
+        </div>
+    
+        <div class="product" data-id="F6904">
+          <img src="./img/sp5.webp" alt="Sản phẩm 5">
+          <div class="product-info">
+            <span class="discount">-30%</span>
+            <h3>PLAYDOH</h3>
+            <p>Bộ trò chơi Playdoh bé học làm đầu bếp nhí PLAYDOH F6904</p>
+            <div class="parent"><span class="sku">SKU: F6904</span></div>
+            <div class="price">
+              <span class="old-price">400.000₫</span>
+              <span class="new-price">280.000₫</span>
+            </div>
+            <button class="add-to-cart">Thêm Vào Giỏ Hàng</button>
+            <button class="favorite-button">&#9825;</button>
+          </div>
+        </div>
+
+          <div class="product">
+            <img src="./img/sp5.webp" alt="Sản phẩm 5">
+            <div class="product-info">
+                <span class="discount">-30%</span>
+                <h3>PLAYDOH</h3>
+                <p>Bộ trò chơi Playdoh bé học làm đầu bếp nhí PLAYDOH F6904</p>
+                <div class="parent"><span class="sku">SKU: F6904</span></div>
+                <div class="price">
+                    <span class="old-price">400.000₫</span>
+                    <span class="new-price">280.000₫</span>
+                </div>
+                <button class="add-to-cart">Thêm Vào Giỏ Hàng</button>
+                <button class="favorite-button">&#9825;</button>
+            </div>
+          </div>
+
+          <div class="product">
+            <img src="./img/sp5.webp" alt="Sản phẩm 5">
+            <div class="product-info">
+                <span class="discount">-30%</span>
+                <h3>PLAYDOH</h3>
+                <p>Bộ trò chơi Playdoh bé học làm đầu bếp nhí PLAYDOH F6904</p>
+                <div class="parent"><span class="sku">SKU: F6904</span></div>
+                <div class="price">
+                    <span class="old-price">400.000₫</span>
+                    <span class="new-price">280.000₫</span>
+                </div>
+                <button class="add-to-cart">Thêm Vào Giỏ Hàng</button>
+                <button class="favorite-button">&#9825;</button>
+            </div>
+          </div>
+
+          <div class="product">
+            <img src="./img/sp5.webp" alt="Sản phẩm 5">
+            <div class="product-info">
+                <span class="discount">-30%</span>
+                <h3>PLAYDOH</h3>
+                <p>Bộ trò chơi Playdoh bé học làm đầu bếp nhí PLAYDOH F6904</p>
+                <div class="parent"><span class="sku">SKU: F6904</span></div>
+                <div class="price">
+                    <span class="old-price">400.000₫</span>
+                    <span class="new-price">280.000₫</span>
+                </div>
+                <button class="add-to-cart">Thêm Vào Giỏ Hàng</button>
+                <button class="favorite-button">&#9825;</button>
+            </div>
+          </div>
+      </div>
+
+      <div class="slider-container">
+        <div class="slider-track">
+            <div class="slider-thumb" id="sliderThumb"><img src="./img/nutkeo.png" width="90px"></div>
+        </div>
+      </div>
+
+  </section>
+
+  <section class="testimonials">
+    <h2>Khách Hàng Nói Gì?</h2>
+    <div class="testimonial-list">
+        <div class="testimonial">
+            <p>"Đồ chơi rất an toàn và sáng tạo, con mình rất thích!"</p>
+            <span>- Nguyễn Thanh Tâm</span>
+        </div>
+        <div class="testimonial">
+            <p>"Nhân viên nhiệt tình, tư vấn tận tâm, dịch vụ tuyệt vời."</p>
+            <span>- Lê Minh Khoa</span>
+        </div>
+        <div class="testimonial">
+            <p>"Giá cả hợp lý, chất lượng tuyệt vời, sẽ mua lần sau."</p>
+            <span>- Phạm Thu Hà</span>
+        </div>
+    </div>
+    </section>
+
+    <div class="quick-contact">
+      <a href="https://m.me/babybear" target="_blank" class="contact-button messenger">
+          <img src="./img/mess.png" alt="Messenger">
+      <a href="https://zalo.me/yourZaloID" target="_blank" class="contact-button zalo">
+          <img src="./img/zl.png" alt="Zalo">
+      </a>
+      <a href="https://wa.me/yourWhatsAppNumber" target="_blank" class="contact-button whatsapp">
+          <img src="./img/whatsapp.png" alt="WhatsApp">
+      </a>
+  </div>  
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-top">
+        <div class="footer-section">
+          <h3>Về Chúng Tôi</h3>
+          <p>Chúng tôi chuyên cung cấp đồ chơi giáo dục, sáng tạo và an toàn cho trẻ em. Cam kết mang lại trải nghiệm mua sắm tuyệt vời cho phụ huynh và các bé.</p>
+        </div>
+  
+        <div class="footer-section">
+          <h3>Liên Hệ</h3>
+          <ul>
+            <li>📍 Địa chỉ: Số 123, Đường ABC, Quận 1, TP.HCM</li>
+            <li>📞 Hotline: <a href="#">1800.0081</a></li>
+            <li>📧 Email: <a href="#">babybear@dochoitreem.com</a></li>
+          </ul>
+        </div>
+  
+        <div class="footer-section">
+          <h3>Dịch Vụ Khách Hàng</h3>
+          <ul>
+            <li><a href="./html/csdt.html">Chính sách đổi trả</a></li>
+            <li><a href="./html/hdmh.html">Hướng dẫn mua hàng</a></li>
+            <li><a href="./html/ptth.html">Phương thức thanh toán</a></li>
+            <li><a href="./html/csbm.html">Chính sách bảo mật</a></li>
+          </ul>
+        </div>
+  
+        <div class="footer-section">
+          <h3>Theo Dõi Chúng Tôi</h3>
+          <ul class="social-links">
+            <li><a href="#"><img src="./img/FB.png" alt="Facebook"></a></li>
+            <li><a href="#"><img src="./img/ig.webp" alt="Instagram"></a></li>
+            <li class="social-linksYT"><a href="#"><img src="./img/yt.jpg" alt="YouTube"></a></li>
+          </ul>
+        </div>
+      </div>
+  
+      <div class="footer-bottom">
+        <p>&copy; 2024 Đồ Chơi Trẻ Em. Tất cả các quyền được bảo lưu.</p>
+        <p>Thiết kế bởi <a href="#">Yến Vy</a></p>
+      </div>
+    </div>
+  </footer>
+  
+</body>
+</html>

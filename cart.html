@@ -1,0 +1,311 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Giỏ Hàng Của Bạn</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f6fc;
+      margin: 0;
+      padding: 0;
+    }
+
+    #cart-container {
+      max-width: 800px;
+      margin: 30px auto;
+      padding: 10px;
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      text-align: center;
+      margin: 0px;
+      font-size: 28px;
+      color: #1E3A5F;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .icon-box {
+      font-size: 50px;
+      color: #FFB347;
+      margin-bottom: 10px;
+      animation: bounce 1s infinite alternate;
+      text-align: center;
+    }
+
+    @keyframes bounce {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-10px); }
+    }
+
+    .cart-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 15px;
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .cart-item img {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+    }
+
+    .cart-item-info {
+      flex: 1;
+      margin-left: 10px;
+    }
+
+    .cart-item-info h3 {
+      margin: 0;
+      font-size: 18px;
+      color: #1E3A5F;
+    }
+
+    .cart-item-info p {
+      margin: 5px 0;
+      font-size: 16px;
+      color: #626161;
+    }
+
+    .cart-actions {
+      display: flex;
+      align-items: center;
+    }
+
+    .cart-actions button {
+      padding: 8px 12px;
+      font-size: 14px;
+      margin: 0 5px;
+      cursor: pointer;
+      background-color: #c0bfbf;
+      color: white;
+      border: 0;
+      border-radius: 4px;
+      transition: background-color 0.3s ease;
+    }
+    .cart-actions button:hover {
+      background-color: #626161;
+    }
+
+    .total-price, .before-discount, .discount-amount {
+      text-align: right;
+      font-weight: bold;
+      margin-top: 10px;
+      font-size: 20px;
+      color: #1E3A5F;
+    }
+
+    .total-price {
+      font-size: 21px;
+    }
+
+    .cart-footer {
+      text-align: right;
+      margin-top: 20px;
+    }
+
+    .cart-footer button {
+      padding: 10px 20px;
+      background-color: #FFB347;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+      font-size: 18px;
+    }
+
+    .cart-footer button:hover {
+      background-color: #002c65;
+    }
+
+    .discount-section {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .discount-section input {
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      border-left: 4px solid #FFB347;
+      width: 70%;
+      background-color: #FFFAE5;
+      height: 25px;
+      font-size: medium;
+    }
+
+    .discount-section button {
+      padding: 10px 20px;
+      background-color: #FFB347;
+      border-left: 4px solid #FFB347;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+      font-size: medium;
+      margin-left: 10px;
+      transition: background-color 0.3s ease;
+      height: 45px;
+    }
+
+    .discount-section button:hover {
+      background-color: #1E3A5F;
+    }
+
+    .cart-description {
+      color: #555;
+      font-size: 16px;
+      margin: 10px 0 20px;
+      padding: 0 10px;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    .note {
+      background-color: #FFFAE5;
+      border-left: 4px solid #FFB347;
+      padding: 15px;
+      margin: 20px 0px;
+      border-radius: 5px;
+      font-size: 16px;
+      color: #333;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+<div id="cart-container">     
+    <div class="icon-box">🛒
+    </div>
+    <h2>Giỏ Hàng Của Bạn</h2>
+    <p class="cart-description">Bạn có thể kiểm tra các sản phẩm trong giỏ hàng của mình và tiến hành thanh toán khi sẵn sàng.</p>
+    <div class="discount-section">
+      <input type="text" id="discount-code" placeholder="Nhập mã giảm giá">
+      <button onclick="applyDiscount()">Áp Dụng</button>
+    </div>
+    <ul id="cart-items"></ul>
+    <p class="before-discount">Tổng tiền trước giảm giá: 0₫</p>
+    <p class="discount-amount">Giảm giá: 0₫</p>
+    <p class="total-price">Tổng tiền: 0₫</p>
+    <div class="cart-footer">
+      <button class="btn-continue" onclick="continueShopping()">Tiếp Tục Mua Sắm</button>
+      <button onclick="checkout()">Thanh Toán</button>
+    </div>
+
+    <div class="note">
+      <strong>Lưu ý:</strong>
+      <ul>
+        <li>Sử dụng mã <strong>SALE10</strong> để được giảm 10% trên tổng giá trị đơn hàng.</li>
+        <li>🚚 Miễn phí vận chuyển cho đơn hàng trên 500,000₫.</li>
+        <li>🔄 Sản phẩm được đổi trả trong vòng 30 ngày kể từ ngày mua.</li>
+        <li>📦 Đơn hàng sẽ được xử lý trong 1-3 ngày làm việc.</li>
+      </ul>
+  </div>
+</div>
+
+<script>
+  function displayCart() {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let cartItems = document.getElementById('cart-items');
+    let totalPriceElement = document.querySelector('.total-price');
+    let beforeDiscountElement = document.querySelector('.before-discount');
+    let discountAmountElement = document.querySelector('.discount-amount');
+    cartItems.innerHTML = '';
+
+    let totalPrice = 0;
+    let beforeDiscount = 0;
+
+    if (cart.length === 0) {
+      cartItems.innerHTML = '<p>Giỏ hàng trống</p>';
+      totalPriceElement.textContent = 'Tổng tiền: 0₫';
+      beforeDiscountElement.textContent = 'Tổng tiền trước giảm giá: 0₫';
+      discountAmountElement.textContent = 'Giảm giá: 0₫';
+      return;
+    }
+
+    cart.forEach((item, index) => {
+      let itemTotal = parseInt(item.price.replace(/\D/g, '')) * item.quantity;
+      beforeDiscount += itemTotal;
+      totalPrice += itemTotal;
+
+      let li = document.createElement('li');
+      li.classList.add('cart-item');
+      li.innerHTML = `
+        <img src="${item.imgSrc}" alt="${item.name}">
+        <div class="cart-item-info">
+          <h3>${item.name}</h3>
+          <p>Giá: ${item.price}</p>
+          <p>Số lượng: ${item.quantity}</p>
+        </div>
+        <div class="cart-actions">
+          <button onclick="updateQuantity(${index}, -1)">-</button>
+          <button onclick="updateQuantity(${index}, 1)">+</button>
+          <button onclick="removeItem(${index})">Xóa</button>
+        </div>
+      `;
+      cartItems.appendChild(li);
+    });
+
+    beforeDiscountElement.textContent = `Tổng tiền trước giảm giá: ${beforeDiscount.toLocaleString('vi-VN')}₫`;
+    totalPriceElement.textContent = `Tổng tiền: ${totalPrice.toLocaleString('vi-VN')}₫`;
+    discountAmountElement.textContent = `Giảm giá: ${beforeDiscount - totalPrice > 0 ? (beforeDiscount - totalPrice).toLocaleString('vi-VN') : '0₫'}`;
+  }
+
+  function updateQuantity(index, change) {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let item = cart[index];
+    item.quantity += change;
+    if (item.quantity <= 0) {
+      cart.splice(index, 1);
+    }
+    localStorage.setItem('cart', JSON.stringify(cart));
+    displayCart();
+  }
+
+  function removeItem(index) {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    cart.splice(index, 1);
+    localStorage.setItem('cart', JSON.stringify(cart));
+    displayCart();
+  }
+
+  function applyDiscount() {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let discountCode = document.getElementById('discount-code').value;
+    let totalPrice = 0;
+    let discountAmount = 0;
+    cart.forEach(item => {
+      totalPrice += parseInt(item.price.replace(/\D/g, '')) * item.quantity;
+    });
+
+    if (discountCode === 'SALE10') {
+      discountAmount = totalPrice * 0.1;
+      totalPrice -= discountAmount;
+    }
+    document.querySelector('.total-price').textContent = `Tổng tiền: ${totalPrice.toLocaleString('vi-VN')}₫`;
+    document.querySelector('.discount-amount').textContent = `Giảm giá: ${discountAmount.toLocaleString('vi-VN')}₫`;
+  }
+
+  function continueShopping() {
+    window.location.href = './products.html';
+  }
+
+  function checkout() {
+    window.location.href = './checkout.html';
+  }
+
+  window.onload = displayCart;
+</script>
+</body>
+</html>

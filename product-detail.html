@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sản Phẩm</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/bootstrap.min.css">
+  <script src="./js/jquery-3.7.1.min.js"></script>
+  <script src="./js/main.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+
+    .product-detail-container {
+      display: flex;
+      justify-content: center;
+      padding: 30px 0;
+    }
+
+    .product-detail {
+      background-color: #ffffff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      overflow: hidden;
+      display: flex;
+      max-width: 1000px;
+      padding: 20px;
+      width: 90%;
+    }
+
+    .product-detail img {
+      width: 50%;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-right: 20px;
+    }
+
+    .product-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 50%;
+    }
+
+    .product-info h1 {
+      font-size: 26px;
+      font-weight: bold;
+      color: #1E3A5F;
+      margin-bottom: 10px;
+    }
+
+    .product-info p {
+      font-size: 18px;
+      color: #333;
+      line-height: 1.6;
+      margin-bottom: 10px;
+    }
+
+    .price {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 10px;
+    }
+
+    .old-price {
+      text-decoration: line-through;
+      color: #333;
+      font-size: 15px;
+    }
+
+    .new-price {
+      font-size: 30px;
+      color: #f8351f;
+    }
+
+    button {
+      background-color: #FFB347;
+      color: #1E3A5F;
+      font-size: 16px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      margin-bottom: 10px;
+    }
+
+    button:hover {
+      background-color: #1E3A5F;
+      color: #FFB347;
+    }
+
+    /* Nút tăng giảm số lượng */
+    .quantity-controls {
+      display: flex;
+      align-items: center;
+      margin: 10px;
+    }
+
+    .quantity-controls button {
+      background-color:#f3f0ed;
+      color: #1E3A5F;
+      padding: 5px;
+      border: none;
+      font-size: 18px;
+      cursor: pointer;
+      margin: 0 5px;
+    }
+
+    .quantity-controls input {
+      width: 40px;
+      text-align: center;
+      font-size: 16px;
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .product-specs, .reviews {
+      margin-top: 30px;
+    }
+
+    .spec-title, .review-title {
+      font-size: 20px;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    .spec-list, .review-item {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .spec-list li, .review-item {
+      font-size: 16px;
+      color: #555;
+      margin-bottom: 5px;
+    }
+
+     /* Phần Thông Số Kỹ Thuật */
+     .product-specs {
+      background-color: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      margin-top: 30px;
+    }
+
+    .spec-title {
+      font-size: 20px;
+      font-weight: bold;
+      color: #1E3A5F;
+      border-bottom: 2px solid #1E3A5F;
+      padding-bottom: 10px;
+      margin-bottom: 15px;
+    }
+
+    .spec-list {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .spec-list li {
+      font-size: 16px;
+      color: #555;
+      margin-bottom: 10px;
+      transition: color 0.3s;
+    }
+
+    .spec-list li:hover {
+      color: #FFB347;
+    }
+     /* Phần Đánh Giá */
+     .reviews {
+      background-color: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      margin-top: 30px;
+    }
+
+    .review-title {
+      font-size: 20px;
+      font-weight: bold;
+      color: #1E3A5F;
+      border-bottom: 2px solid #1E3A5F;
+      padding-bottom: 10px;
+      margin-bottom: 15px;
+    }
+
+    .review-item {
+      margin-bottom: 20px;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 10px;
+    }
+
+    .review-item h3 {
+      font-size: 18px;
+      color: #333;
+      margin-bottom: 5px;
+    }
+
+    .review-item p {
+      font-size: 14px;
+      color: #555;
+    }
+
+    .rating {
+      font-size: 16px;
+      color: #FFB347;
+    }
+
+  </style>
+  <script>
+    function getQueryParam(name) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(name);
+    }
+
+    function loadProductDetails() {
+      const sku = getQueryParam('sku'); 
+      const productDetails = {
+        BK1105: {
+          name: "Bộ Khảo Cổ Tìm Xương Khủng Long",
+          description: "Bộ LEGO khảo cổ tìm xương khủng long T.Rex",
+          price: "322.000₫",
+          oldPrice: "644.000₫",
+          image: "./img/DM1sp1.webp",
+          details: "Bộ trò chơi giúp trẻ khám phá khủng long qua lắp ráp.",
+          material: "Nhựa ABS an toàn, không chứa BPA",
+          ageRange: "3 tuổi trở lên",
+          dimensions: "30cm x 20cm x 10cm",
+          weight: "500g", 
+          colorOptions: ["Xanh", "Đỏ", "Vàng"],
+          manufacturer: "LEGO", 
+          inStock: true, 
+          rating: 4.5, 
+          },
+          BK1106: {
+          name: "Đồ Chơi Lắp Ráp Thùng Gạch ",
+          description: "Đồ Chơi Lắp Ráp Thùng Gạch Trung Classic Sáng Tạo LEGO CLASSIC 10696",
+          price: "1.269.000₫",
+          oldPrice: "761.000₫",
+          image: "./img/DM1sp2.webp",
+          details: "Bộ trò chơi giúp trẻ khám phá khủng long qua lắp ráp.",
+          material: "Nhựa ABS an toàn, không chứa BPA",
+          ageRange: "3 tuổi trở lên",
+          dimensions: "30cm x 20cm x 10cm",
+          weight: "500g", 
+          colorOptions: ["Xanh", "Đỏ", "Vàng"],
+          manufacturer: "LEGO", 
+          inStock: true, 
+          rating: 4.5, 
+          },
+          BK1107: {
+          name: "Đồ Chơi Lắp Ráp Thùng Gạch ",
+          description: "Đồ Chơi Lắp Ráp Thùng Gạch Trung Classic Sáng Tạo LEGO CLASSIC 10696",
+          price: "1.269.000₫",
+          oldPrice: "761.000₫",
+          image: "./img/DM1sp3.webp",
+          details: "Bộ trò chơi giúp trẻ khám phá khủng long qua lắp ráp.",
+          material: "Nhựa ABS an toàn, không chứa BPA",
+          ageRange: "3 tuổi trở lên",
+          dimensions: "30cm x 20cm x 10cm",
+          weight: "500g", 
+          colorOptions: ["Xanh", "Đỏ", "Vàng"],
+          manufacturer: "LEGO", 
+          inStock: true, 
+          rating: 4.5, 
+          },
+          BK1108: {
+          name: "Đồ Chơi Lắp Ráp Thùng Gạch ",
+          description: "Đồ Chơi Lắp Ráp Thùng Gạch Trung Classic Sáng Tạo LEGO CLASSIC 10696",
+          price: "1.269.000₫",
+          oldPrice: "761.000₫",
+          image: "./img/DM1sp4.webp",
+          details: "Bộ trò chơi giúp trẻ khám phá khủng long qua lắp ráp.",
+          material: "Nhựa ABS an toàn, không chứa BPA",
+          ageRange: "3 tuổi trở lên",
+          dimensions: "30cm x 20cm x 10cm",
+          weight: "500g", 
+          colorOptions: ["Xanh", "Đỏ", "Vàng"],
+          manufacturer: "LEGO", 
+          inStock: true, 
+          rating: 4.5, 
+          },
+          BK1109: {
+          name: "Đồ Chơi Lắp Ráp Thùng Gạch ",
+          description: "Đồ Chơi Lắp Ráp Thùng Gạch Trung Classic Sáng Tạo LEGO CLASSIC 10696",
+          price: "1.269.000₫",
+          oldPrice: "761.000₫",
+          image: "./img/DM1sp5.webp",
+          details: "Bộ trò chơi giúp trẻ khám phá khủng long qua lắp ráp.",
+          material: "Nhựa ABS an toàn, không chứa BPA",
+          ageRange: "3 tuổi trở lên",
+          dimensions: "30cm x 20cm x 10cm",
+          weight: "500g", 
+          colorOptions: ["Xanh", "Đỏ", "Vàng"],
+          manufacturer: "LEGO", 
+          inStock: true, 
+          rating: 4.5, 
+          },
+      };
+
+      const product = productDetails[sku];
+
+      if (product) {
+        document.getElementById('product-name').innerText = product.name;
+        document.getElementById('product-description').innerText = product.description;
+        document.getElementById('product-price').innerText = product.price;
+        document.getElementById('product-old-price').innerText = product.oldPrice;
+        document.getElementById('product-image').src = product.image;
+        document.getElementById('product-details').innerText = product.details;
+        document.getElementById('product-material').innerText = product.material;
+        document.getElementById('product-age-range').innerText = product.ageRange;
+        document.getElementById('product-dimensions').innerText = product.dimensions;
+        document.getElementById('product-weight').innerText = product.weight;
+        document.getElementById('product-color-options').innerText = product.colorOptions.join(", ");
+        document.getElementById('product-manufacturer').innerText = product.manufacturer;
+        document.getElementById('product-stock-status').innerText = product.inStock ? "Còn hàng" : "Hết hàng";
+        document.getElementById('product-rating').innerText = product.rating + " / 5";
+        
+
+      } else {
+        document.getElementById('product-name').innerText = 'Sản phẩm không tồn tại';
+      }
+    }
+
+    window.onload = loadProductDetails;
+    function changeQuantity(amount) {
+      const quantityInput = document.getElementById('quantity');
+      let currentQuantity = parseInt(quantityInput.value);
+      if (currentQuantity + amount >= 1) {
+        quantityInput.value = currentQuantity + amount;
+      }
+    }
+
+    function addToCart(productName) {
+      alert(productName + " đã được thêm vào giỏ hàng.");
+    }
+  </script>
+</head>
+<body>
+  <header>
+    <!--thanh thông tin trên cùng-->
+    <div class="top-bar">
+      <div class="location">
+        <span>📍 Xem tồn kho, giá bán tại:</span>
+        <select>
+          <option>Miền Bắc</option>
+          <option>Miền Trung</option>
+          <option>Miền Nam</option>
+        </select>
+      </div>
+      <div class="top-links">
+        <a href="#">Hotline: 1800.0081</a> |
+        <a href="#">Zalo cửa hàng</a> |
+        <a href="#">Ưu đãi khi tải app</a> |
+        <a href="#">Thưởng Kicoin</a>
+      </div>
+    </div>
+
+    <!--dòng chứa logo, thanh tìm kiếm, các biểu tượng-->
+    <div class="header-top">
+        <div class="logo">
+          <img src="./img/logo2.png" alt="BABY BEAR Logo">
+        </div>
+
+        <div class="search-bar">
+          <input type="text" placeholder="Ba mẹ tìm kiếm gì cho con hôm nay">
+          <button type="submit"><a></a>🔍</button>
+        </div>
+
+        <div class="header-icons">
+          <a href="#">🛍️ Lịch sử đơn hàng</a>
+          <a href="./register.html">👤 Tài khoản</a>
+          <a href="./cart.html">🛒 Giỏ hàng</a>
+        </div>
+    </div>
+
+    <!--dòng chứa menu điều hướng-->
+    <nav class="main-menu">
+      <ul>
+        <li><a href="index.html">Trang chủ</a></li>
+        <li><a href="./products.html">Sản phẩm</a></li>
+        <li><a href="./new.html">Tin tức</a></li>
+        <li><a href="./about.html">Về chúng tôi</a></li>
+        <li><a href="./hangmoi.html">Hàng mới</a></li>
+      </ul>
+    </nav>
+  </header>
+  
+  <div class="product-detail-container">
+    <div class="product-detail">
+      <img id="product-image" src="" alt="Product Image">
+      <div class="product-info">
+        <h1 id="product-name">Tên sản phẩm</h1>
+        <p id="product-description">Mô tả sản phẩm</p>
+        <div class="price">
+          <span class="old-price" id="product-old-price">Giá cũ</span>
+          <span class="new-price" id="product-price">Giá mới</span>
+        </div>
+        <div class="" id="product-details">Chi tiết</div>
+        <li>Chất liệu: <span id="product-material"></span></li>
+        <li>Kích thước: <span id="product-dimensions"></span></li>
+        <li>Trọng lượng: <span id="product-weight"></span></li>
+        <li>Độ tuổi sử dụng: <span id="product-age-range"></span></li>
+        <li>Màu sắc: <span id="product-color-options"></span></li>
+        <li>Nhà sản xuất: <span id="product-manufacturer"></span></li>
+        <li>Tình trạng kho: <span id="product-stock-status"></span></li>
+        <li>Đánh giá: <span id="product-rating"></span></li>
+        <div class="quantity-controls">
+          <button onclick="changeQuantity(-1)">-</button>
+          <input id="quantity" type="number" value="1" min="1">
+          <button onclick="changeQuantity(1)">+</button>
+        </div>
+        
+        <button onclick="addToCart('Bộ Khảo Cổ Tìm Xương Khủng Long')">Thêm Vào Giỏ Hàng</button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Đánh Giá Sản Phẩm -->
+  <div class="reviews">
+    <div class="review-title">Đánh Giá Sản Phẩm</div>
+    <div id="product-reviews">
+      <p><strong>Nguyễn Văn A:</strong> "Sản phẩm rất đẹp và an toàn cho bé, bé nhà mình rất thích!"</p>
+      <p><strong>Trần Thị B:</strong> "Màu sắc bắt mắt, dễ vệ sinh, đúng như mô tả. Mình rất hài lòng."</p>
+      <p><strong>Minh C:</strong> "Giá cả hợp lý, chất lượng tuyệt vời. Sẽ ủng hộ shop tiếp."</p>
+    </div>
+  </div>
+
+    <div class="quick-contact">
+      <a href="https://m.me/babybear" target="_blank" class="contact-button messenger">
+          <img src="./img/mess.png" alt="Messenger">
+      <a href="https://zalo.me/yourZaloID" target="_blank" class="contact-button zalo">
+          <img src="./img/zl.png" alt="Zalo">
+      </a>
+      <a href="https://wa.me/yourWhatsAppNumber" target="_blank" class="contact-button whatsapp">
+          <img src="./img/whatsapp.png" alt="WhatsApp">
+      </a>
+  </div>  
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-top">
+        <div class="footer-section">
+          <h3>Về Chúng Tôi</h3>
+          <p>Chúng tôi chuyên cung cấp đồ chơi giáo dục, sáng tạo và an toàn cho trẻ em. Cam kết mang lại trải nghiệm mua sắm tuyệt vời cho phụ huynh và các bé.</p>
+        </div>
+  
+        <div class="footer-section">
+          <h3>Liên Hệ</h3>
+          <ul>
+            <li>📍 Địa chỉ: Số 123, Đường ABC, Quận 1, TP.HCM</li>
+            <li>📞 Hotline: <a href="#">1800.0081</a></li>
+            <li>📧 Email: <a href="#">babybear@dochoitreem.com</a></li>
+          </ul>
+        </div>
+  
+        <div class="footer-section">
+          <h3>Dịch Vụ Khách Hàng</h3>
+          <ul>
+            <li><a href="./html/csdt.html">Chính sách đổi trả</a></li>
+            <li><a href="./html/hdmh.html">Hướng dẫn mua hàng</a></li>
+            <li><a href="./html/ptth.html">Phương thức thanh toán</a></li>
+            <li><a href="./html/csbm.html">Chính sách bảo mật</a></li>
+          </ul>
+        </div>
+  
+        <div class="footer-section">
+          <h3>Theo Dõi Chúng Tôi</h3>
+          <ul class="social-links">
+            <li><a href="#"><img src="./img/FB.png" alt="Facebook"></a></li>
+            <li><a href="#"><img src="./img/ig.webp" alt="Instagram"></a></li>
+            <li class="social-linksYT"><a href="#"><img src="./img/yt.jpg" alt="YouTube"></a></li>
+          </ul>
+        </div>
+      </div>
+  
+      <div class="footer-bottom">
+        <p>&copy; 2024 Đồ Chơi Trẻ Em. Tất cả các quyền được bảo lưu.</p>
+        <p>Thiết kế bởi <a href="#">Yến Vy</a></p>
+      </div>
+    </div>
+  </footer>
+  
+</body>
+</html>

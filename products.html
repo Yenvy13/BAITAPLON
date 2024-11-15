@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sản Phẩm</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/bootstrap.min.css">
+  <script src="./js/main.js"></script>
+  <script src="./js/jquery-3.7.1.min.js"></script>
+  <style class="">
+.product-container {
+    display: flex;
+    padding: 20px;
+    list-style-type: none;
+}
+
+.sidebar {
+    width: 20%;
+    padding: 15px;
+    border-right: 1px solid #ccc;
+}
+
+.sidebar h3 {
+    margin-bottom: 10px;
+    color: #FFB347;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    margin-bottom: 20px;
+}
+
+.sidebar ul li {
+    margin: 8px 0;
+}
+button {
+    background-color:  #FFB347;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+button:hover {
+    background-color: #002c65;
+    
+}
+
+.product-list {
+  display: flex;
+  flex-wrap: wrap; 
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+/* Điều chỉnh sản phẩm */
+.product {
+  flex: 0 1 calc(25% - 20px);
+  margin: 10px; 
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.product:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+</style>
+
+  <script class="">
+function addToCart(productName) {
+    alert(`Sản phẩm "${productName}" đã được thêm vào giỏ hàng!`);
+}
+
+function filterProducts() {
+    let checkboxes = document.querySelectorAll('.sidebar input[type="checkbox"]');
+    let selectedPrices = Array.from(checkboxes)
+                              .filter(checkbox => checkbox.checked)
+                              .map(checkbox => parseInt(checkbox.value));
+
+    let products = document.querySelectorAll('.product-item');
+    products.forEach(product => {
+        let productPrice = parseInt(product.getAttribute('data-price'));
+        let isVisible = selectedPrices.some(price => productPrice <= price);
+        
+        product.style.display = isVisible || selectedPrices.length === 0 ? 'block' : 'none';
+    });
+}
+
+let selectedCategory = 'all';
+let selectedPriceRange = null;
+
+function filterProductsByCategory(category) {
+    selectedCategory = category;
+    applyFilters(); 
+}
+
+function filterProductsByPrice(priceRange, element) {
+    document.querySelectorAll('.price-checkbox').forEach(checkbox => {
+        if (checkbox !== element) {
+            checkbox.checked = false;
+        }
+    });
+
+    selectedPriceRange = element.checked ? priceRange : null;
+    applyFilters(); 
+}
+
+function applyFilters() {
+    let products = document.querySelectorAll('.product');
+    products.forEach(product => {
+        let productCategory = product.getAttribute('data-category');
+        let productPrice = parseInt(product.getAttribute('data-price'));
+
+        let matchesCategory = (selectedCategory === 'all' || productCategory === selectedCategory);
+
+        let matchesPrice = true;
+        if (selectedPriceRange) {
+            let [minPrice, maxPrice] = selectedPriceRange;
+            matchesPrice = productPrice >= minPrice && productPrice <= maxPrice;
+        }
+
+        product.style.display = (matchesCategory && matchesPrice) ? 'block' : 'none';
+    });
+}
+
+function addToCart(productName) {
+  let productElement = Array.from(document.querySelectorAll('.product')).find(product =>
+    product.querySelector('.product-info p').textContent.includes(productName)
+  );
+
+  if (!productElement) {
+    alert("Không tìm thấy sản phẩm!");
+    return;
+  }
+
+  let price = productElement.querySelector('.new-price').textContent.trim();
+  let imgSrc = productElement.querySelector('img').src;
+
+  let cart = JSON.parse(localStorage.getItem('cart'));
+
+  let existingProduct = cart.find(item => item.name === productName);
+
+  if (existingProduct) {
+    existingProduct.quantity += 1;
+  } else {
+    cart.push({
+      name: productName,
+      price: price,
+      imgSrc: imgSrc,
+      quantity: 1
+    });
+  }
+
+  localStorage.setItem('cart', JSON.stringify(cart));
+
+  alert(`${productName} đã được thêm vào giỏ hàng!`);
+}
+initializeCart();
+
+</script>
+</head>
+<body>
+  <header>
+    <!--thanh thông tin trên cùng-->
+    <div class="top-bar">
+      <div class="location">
+        <span>📍 Xem tồn kho, giá bán tại:</span>
+        <select>
+          <option>Miền Bắc</option>
+          <option>Miền Trung</option>
+          <option>Miền Nam</option>
+        </select>
+      </div>
+      <div class="top-links">
+        <a href="#">Hotline: 1800.0081</a> |
+        <a href="#">Zalo cửa hàng</a> |
+        <a href="#">Ưu đãi khi tải app</a> |
+        <a href="#">Thưởng Kicoin</a>
+      </div>
+    </div>
+
+    <!--dòng chứa logo, thanh tìm kiếm, các biểu tượng-->
+    <div class="header-top">
+        <div class="logo">
+          <img src="./img/logo2.png" alt="BABY BEAR Logo">
+        </div>
+
+        <div class="search-bar">
+          <input type="text" placeholder="Ba mẹ tìm kiếm gì cho con hôm nay">
+          <button type="submit"><a></a>🔍</button>
+        </div>
+
+        <div class="header-icons">
+          <a href="#">🛍️ Lịch sử đơn hàng</a>
+          <a href="./register.html">👤 Tài khoản</a>
+          <a href="./cart.html">🛒 Giỏ hàng</a>
+        </div>
+    </div>
+
+    <!--dòng chứa menu điều hướng-->
+    <nav class="main-menu">
+      <ul>
+        <li><a href="index.html">Trang chủ</a></li>
+        <li><a href="./products.html">Sản phẩm</a></li>
+        <li><a href="./new.html">Tin tức</a></li>
+        <li><a href="./about.html">Về chúng tôi</a></li>
+        <li><a href="./hangmoi.html">Hàng mới</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!--DS sản phẩm-->
+  <div class="product-container">
+    <div class="sidebar">
+        <h3><a href="./products.html">Danh Mục</a></h3>
+        <ul>
+            <li onclick="filterProductsByCategory('dochoilapghep')"><a href="#">Đồ chơi lắp ghép</a></li>
+            <li onclick="filterProductsByCategory('dochoisangtao')"><a href="#">Đồ chơi sáng tạo</a></li>
+            <li onclick="filterProductsByCategory('thegioidongvat')"><a href="#">Thế giới động vật</a></li>
+            <li onclick="filterProductsByCategory('dochoimamnon')"><a href="#">Đồ chơi mầm non</a></li>
+            <li onclick="filterProductsByCategory('sieuanhhung')"><a href="#">Siêu anh hùng</a></li>
+            <li onclick="filterProductsByCategory('keodochoi')"><a href="#">Kẹo đồ chơi</a></li>
+            <li onclick="filterProductsByCategory('bupbe')"><a href="#">Búp bê</a></li>
+            <li onclick="filterProductsByCategory('thubong')"><a href="#">Thú bông</a></li>
+        </ul>
+        <h3>Giá (₫)</h3>
+        <ul>
+          <li><input type="checkbox" class="price-checkbox" onclick="filterProductsByPrice([0, 200000], this)"> Dưới 200.000 ₫</li>
+          <li><input type="checkbox" class="price-checkbox" onclick="filterProductsByPrice([200000, 500000], this)"> 200.000 ₫ - 500.000 ₫</li>
+          <li><input type="checkbox" class="price-checkbox" onclick="filterProductsByPrice([500000, 1000000], this)"> 500.000 ₫ - 1.000.000 ₫</li>
+          <li><input type="checkbox" class="price-checkbox" onclick="filterProductsByPrice([1000000, 1500000], this)"> 1.000.000 ₫ - 1.500.000 ₫</li>      
+        </ul>
+    </div>
+  
+    <div class="product-list">
+      <!--DO CHOI LAP GHEP-->
+      <div class="product" data-price="322000" data-category="dochoilapghep">
+        <a href="product-detail.html?sku=BK1105" class="product-link">
+          <img src="./img/DM1sp1.webp" alt="Bộ Khảo Cổ Tìm Xương Khủng Long">
+          <div class="product-info">
+            <span class="discount">-50%</span>
+            <h3>LEGO CLASSIC</h3>
+            <p>Bộ Trò Chơi Lắp Ráp Khảo Cổ Tìm Xương Khủng Long - T.Rex LEGO CLASSIC BK1105</p>
+            <div class="parent"><span class="sku">SKU: BK1105</span></div>
+          </div></a>
+        <div class="price">
+          <span class="old-price">644.000₫</span>
+          <span class="new-price">322.000₫</span>
+        </div>
+        <button onclick="addToCart('Bộ Trò Chơi Lắp Ráp Khảo Cổ Tìm Xương Khủng Long - T.Rex LEGO CLASSIC BK1105')">Thêm Vào Giỏ Hàng</button>
+        <button class="favorite-button">&#9825;</button>
+    </div> 
+
+    <div class="product" data-price="761000" data-category="dochoilapghep">
+      <a href="product-detail.html?sku=BK1106" class="">
+        <img src="./img/DM1sp2.webp" alt="">
+      <div class="product-info">
+        <span class="discount">-40%</span>
+        <h3>LEGO CLASSIC</h3>
+        <p>Đồ Chơi Lắp Ráp Thùng Gạch Trung Classic Sáng Tạo LEGO CLASSIC 10696</p>
+        <div class="parent"><span class="sku">SKU: SKU10696</span></div>
+      </div>
+      </a>
+      <div class="price">
+        <span class="old-price">1.269.000₫</span>
+        <span class="new-price">761.000₫</span>
+      </div>
+      <button onclick="addToCart('Đồ Chơi Lắp Ráp Thùng Gạch Trung Classic Sáng Tạo LEGO CLASSIC 10696')">Thêm Vào Giỏ Hàng</button>
+      <button class="favorite-button">&#9825;</button>
+    </div>
+
+    <div class="product" data-price="791000" data-category="dochoilapghep">
+      <a href="product-detail.html?sku=BK1107" class="">
+        <img src="./img/DM1sp3.webp" alt="">
+      <div class="product-info">
+        <span class="discount">-40%</span>
+        <h3>LEGO DUPLO</h3>
+        <p>Đồ Chơi Lắp Ráp Thùng Gạch Duplo Sáng Tạo LEGO DUPLO 10913</p>
+        <div class="parent"><span class="sku">SKU: SKU10913</span></div>
+      </div>
+      </a>
+      <div class="price">
+        <span class="old-price">1.319.000₫</span>
+        <span class="new-price">791.000₫</span>
+      </div>
+      <button onclick="addToCart('Đồ Chơi Lắp Ráp Thùng Gạch Duplo Sáng Tạo LEGO DUPLO 10913')">Thêm Vào Giỏ Hàng</button>
+      <button class="favorite-button">&#9825;</button>
+    </div>
+
+    <div class="product" data-price="309000" data-category="dochoilapghep">
+      <a href="product-detail.html?sku=BK1108" class="">
+        <img src="./img/DM1sp4.webp" alt="">
+        <div class="product-info">
+        <span class="discount">-50%</span>
+        <h3>LEGO DUPLO</h3>
+        <p>Bộ Đồ Chơi Lắp Ráp Tàu Con Thoi Vũ Trụ LEGO CREATOR 31134 MỚI RA MẮT</p>
+        <div class="parent"><span class="sku">SKU: SKU31134</span></div>
+        </div>
+      </a>
+      <div class="price">
+        <span class="old-price">618.000₫</span>
+        <span class="new-price">309.000₫</span>
+      </div>
+      <button onclick="addToCart('Đồ Chơi Lắp Ráp Tàu Con Thoi Vũ Trụ LEGO CREATOR 31134')">Thêm Vào Giỏ Hàng</button>
+      <button class="favorite-button">&#9825;</button>
+    </div>
+    
+    <div class="product" data-price="99000" data-category="dochoilapghep">
+      <a href="product-detail.html?sku=BK1109" class="">
+        <img src="./img/DM1sp5.webp" alt="">
+        <div class="product-info">
+          <span class="discount">-50%</span>
+          <h3>LEGO CITY</h3>
+          <p>Bộ Đồ Chơi Lắp Ráp Xe Cảnh Sát LEGO CITY SKU 60312 MỚI RA MẮT</p>
+          <div class="parent"><span class="sku">SKU: 60312</span></div>
+        </div>
+      </a>
+      <div class="price">
+        <span class="old-price">198.000₫</span>
+        <span class="new-price">99.000₫</span>
+      </div>
+      <button onclick="addToCart('Bộ Đồ Chơi Lắp Ráp Xe Cảnh Sát LEGO CITY SKU 60312 MỚI RA MẮT')">Thêm Vào Giỏ Hàng</button>
+      <button class="favorite-button">&#9825;</button>
+    </div>
+
+    <!--DO CHOI SANG TAO-->
+    <div class="product" data-price="139000" data-category="dochoisangtao">
+      <img src="./img/DM2sp1.webp" alt="">
+      <div class="product-info">
+        <span class="discount">-20%</span>
+        <h3>PLAYDOH</h3>
+        <p>Combo bột nặn 4 màu và bột nặn 4 màu mini PLAYDOH CBB5517-23241-33</p>
+        <div class="parent"><span class="sku">SKU: CBB5517-23241-33</span></div>
+      </div>
+      <div class="price">
+        <span class="old-price">174.000₫</span>
+        <span class="new-price">139.000₫</span>
+      </div>
+      <button onclick="addToCart('Combo bột nặn 4 màu và bột nặn 4 màu mini PLAYDOH CBB5517-23241-33')">Thêm Vào Giỏ Hàng</button>
+      <button class="favorite-button">&#9825;</button>
+  </div> 
+
+  <div class="product" data-price="161.000" data-category="dochoisangtao">
+    <img src="./img/DM2sp2.webp" alt="">
+    <div class="product-info">
+      <span class="discount">-40%</span>
+      <h3>PLAYDOH</h3>
+      <p>Đồ Đồ Chơi Ống Bột Nặn 10 Màu An Toàn Cho Bé PLAYDOH SKU 22037</p>
+      <div class="parent"><span class="sku">SKU: SKU22037</span></div>
+    </div>
+    <div class="price">
+      <span class="old-price">269.000₫</span>
+      <span class="new-price">161.000₫</span>
+    </div>
+    <button onclick="addToCart('Đồ Đồ Chơi Ống Bột Nặn 10 Màu An Toàn Cho Bé PLAYDOH SKU 22037')">Thêm Vào Giỏ Hàng</button>
+    <button class="favorite-button">&#9825;</button>
+  </div>
+
+  <div class="product" data-price="199000" data-category="dochoisangtao">
+    <a href="product-detail.html?sku=ZJ15-BL" class="">
+      <img src="./img/DM2sp3.webp" alt="">
+    <div class="product-info">
+      <span class="discount">-40%</span>
+      <h3>COOLKIDS</h3>
+      <p>Bảng Vẽ Thông Minh Xanh COOLKIDS SKU ZJ15 Cho Bé Thỏa Sức Sáng Tạo </p>
+      <div class="parent"><span class="sku">SKU: 
+        SKU ZJ15-BL</span></div>
+    </div>
+    </a>
+    <div class="price">
+      <span class="old-price">332.000₫</span>
+      <span class="new-price">199.000₫</span>
+    </div>
+    <button onclick="addToCart('Bảng Vẽ Thông Minh Xanh COOLKIDS SKU ZJ15 Cho Bé Thỏa Sức Sáng Tạo')">Thêm Vào Giỏ Hàng</button>
+    <button class="favorite-button">&#9825;</button>
+  </div>
+
+  <div class="product" data-price="218000" data-category="dochoisangtao">
+    <img src="./img/DM2sp4.webp" alt="">
+    <div class="product-info">
+      <span class="discount">-50%</span>
+      <h3>PLAYDOH</h3>
+      <p>Ống bột nặn 10 màu tặng E0801 Bộ Playdoh đầu đời PLAYDOH CB22037-E0801</p>
+      <div class="parent"><span class="sku">SKU: SKU CB22037-E0801</span></div>
+    </div>
+    <div class="price">
+      <span class="old-price">436.000₫</span>
+      <span class="new-price">218.000₫</span>
+    </div>
+    <button onclick="addToCart('Ống bột nặn 10 màu tặng E0801 Bộ Playdoh đầu đời PLAYDOH CB22037-E0801')">Thêm Vào Giỏ Hàng</button>
+    <button class="favorite-button">&#9825;</button>
+  </div>
+  
+  <div class="product" data-price="209000" data-category="dochoisangtao">
+    <img src="./img/DM2sp5.webp" alt="">
+    <div class="product-info">
+      <span class="discount">-50%</span>
+      <h3>STEAM</h3>
+      <p>Bộ khảo cổ truy tìm xương Khủng long - T.Rex STEAM 1423004871</p>
+      <div class="parent"><span class="sku">SKU: 1423004871</span></div>
+    </div>
+    <div class="price">
+      <span class="old-price">418.000₫</span>
+      <span class="new-price">209.000₫</span>
+    </div>
+    <button onclick="addToCart('Bộ khảo cổ truy tìm xương Khủng long - T.Rex STEAM 1423004871')">Thêm Vào Giỏ Hàng</button>
+    <button class="favorite-button">&#9825;</button>
+  </div>
+
+  <!--THE GIOI DONG VAT-->
+  <div class="product" data-price="109000" data-category="thegioidongvat">
+    <img src="./img/DM3sp1.webp" alt="">
+    <div class="product-info">
+      <h3>SCHLEICH</h3>
+      <p>Đồ Chơi Mô Hình Cá Mập Trắng Sát Thủ SCHLEICH 14809</p>
+      <div class="parent"><span class="sku">SKU: SKU 14809</span></div>
+    </div>
+    <div class="price">
+      <span class="new-price">109.000₫</span>
+    </div>
+    <button onclick="addToCart('Đồ Chơi Mô Hình Cá Mập Trắng Sát Thủ SCHLEICH 14809')">Thêm Vào Giỏ Hàng</button>
+    <button class="favorite-button">&#9825;</button>
+  </div>
+
+  <div class="product" data-price="109000" data-category="thegioidongvat">
+    <img src="./img/DM3sp2.webp" alt="">
+    <div class="product-info">
+      <h3>DRAGON</h3>
+      <p>Rồng huyền bí phiên bản siêu hạng DRAGON 6056050</p>
+      <div class="parent"><span class="sku">SKU: SKU 6056050</span></div>
+    </div>
+    <div class="price">
+      <span class="new-price">109.000₫</span>
+    </div>
+    <button onclick="addToCart('Rồng huyền bí phiên bản siêu hạng DRAGON 6056050')">Thêm Vào Giỏ Hàng</button>
+    <button class="favorite-button">&#9825;</button>
+  </div>
+
+  <div class="product" data-price="129000" data-category="thegioidongvat">
+    <img src="./img/DM3sp3.webp" alt="">
+    <div class="product-info">
+      <h3>SCHLEICH</h3>
+      <p>Đồ Chơi Mô Hình Hươu Cao Cổ Mẹ SCHLEICH 14750</p>
+      <div class="parent"><span class="sku">SKU: SKU 14750</span></div>
+    </div>
+    <div class="price">
+      <span class="new-price">129.000₫</span>
+    </div>
+    <button onclick="addToCart('Đồ Chơi Mô Hình Hươu Cao Cổ Mẹ SCHLEICH 14750')">Thêm Vào Giỏ Hàng</button>
+    <button class="favorite-button">&#9825;</button>
+  </div>
+
+  <!--DO CHOI MAM NON-->
+  <div class="product" data-price="229000" data-category="dochoimamnon">
+    <img src="./img/DM4sp1.webp" alt="">
+    <div class="product-info">
+      <span class="discount">-50%</span>
+      <h3>B.BRAND</h3>
+      <p>Đồ chơi thú nhún - Ong vui vẻ B.BRAND BX1455Z</p>
+      <div class="parent"><span class="sku">SKU: SKU BX1455Z</span></div>
+    </div>
+    <div class="price">
+      <span class="old-price">458.000₫</span>
+      <span class="new-price">229.000₫</span>
+    </div>
+    <button onclick="addToCart('Đồ chơi thú nhún - Ong vui vẻ B.BRAND BX1455Z')">Thêm Vào Giỏ Hàng</button>
+    <button class="favorite-button">&#9825;</button>
+  </div>
+
+  <!--SIEU ANH HUNG-->
+  <div class="product" data-price="21000" data-category="sieuanhhung">
+    <img src="./img/DM5sp1.webp" alt="">
+    <div class="product-info">
+      <span class="discount">-70%</span>
+      <h3>AVENGERS</h3>
+      <p>Mô hình Nhân Vật Thor 9.5cm AVENGERS E4353</p>
+      <div class="parent"><span class="sku">SKU: SKU E4353-E4513</span></div>
+    </div>
+    <div class="price">
+      <span class="old-price">69.000₫</span>
+      <span class="new-price">21.000₫</span>
+    </div>
+    <button onclick="addToCart('Mô hình Nhân Vật Thor 9.5cm AVENGERS E4353')">Thêm Vào Giỏ Hàng</button>
+    <button class="favorite-button">&#9825;</button>
+  </div>
+
+  <!--KEO DO CHOI-->
+  <div class="product" data-price="41000" data-category="keodochoi">
+    <img src="./img/DM6sp1.webp" alt="">
+    <div class="product-info">
+      <span class="discount">-70%</span>
+      <h3>SWEETNFUN</h3>
+      <p>Quạt mini - Người bạn ngọt ngào SWEETNFUN 18575</p>
+      <div class="parent"><span class="sku">SKU: SKU 18575</span></div>
+    </div>
+    <div class="price">
+      <span class="old-price">136.000₫</span>
+      <span class="new-price">41.000₫</span>
+    </div>
+    <button onclick="addToCart('Quạt mini - Người bạn ngọt ngào SWEETNFUN 18575')">Thêm Vào Giỏ Hàng</button>
+    <button class="favorite-button">&#9825;</button>
+  </div>
+
+  <!--BUP BE-->
+  <div class="product" data-price="42000" data-category="bupbe">
+    <img src="./img/DM7sp1.webp" alt="">
+    <div class="product-info">
+      <span class="discount">-70%</span>
+      <h3>BREAD BARBERSHOP</h3>
+      <p>Bánh Mì Barber Bread BREAD BARBERSHOP BB32773</p>
+      <div class="parent"><span class="sku">SKU: SKU BB32773</span></div>
+    </div>
+    <div class="price">
+      <span class="old-price">140.000₫</span>
+      <span class="new-price">42.000₫</span>
+    </div>
+    <button onclick="addToCart('Bánh Mì Barber Bread BREAD BARBERSHOP BB32773')">Thêm Vào Giỏ Hàng</button>
+    <button class="favorite-button">&#9825;</button>
+  </div>
+
+  <!--THU BONG-->
+  <div class="product" data-price="179000" data-category="thubong">
+    <img src="./img/DM8sp1.webp" alt="">
+    <div class="product-info">
+      <span class="discount">-40%</span>
+      <h3>IWAYA</h3>
+      <p>Cún con - Baby Toypoodle IWAYA 3114-7VN/JS</p>
+      <div class="parent"><span class="sku">SKU: SKU 3114-7VN/JS</span></div>
+    </div>
+    <div class="price">
+      <span class="old-price">299.000₫</span>
+      <span class="new-price">179.000₫</span>
+    </div>
+    <button onclick="addToCart('Cún con - Baby Toypoodle IWAYA 3114-7VN/JS')">Thêm Vào Giỏ Hàng</button>
+    <button class="favorite-button">&#9825;</button>
+  </div>
+
+  </div>
+    </div>
+</div>
+  <!--Liên hệ nhanh-->
+    <div class="quick-contact">
+      <a href="https://m.me/babybear" target="_blank" class="contact-button messenger">
+          <img src="./img/mess.png" alt="Messenger">
+      <a href="https://zalo.me/yourZaloID" target="_blank" class="contact-button zalo">
+          <img src="./img/zl.png" alt="Zalo">
+      </a>
+      <a href="https://wa.me/yourWhatsAppNumber" target="_blank" class="contact-button whatsapp">
+          <img src="./img/whatsapp.png" alt="WhatsApp">
+      </a>
+  </div>  
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-top">
+        <div class="footer-section">
+          <h3>Về Chúng Tôi</h3>
+          <p>Chúng tôi chuyên cung cấp đồ chơi giáo dục, sáng tạo và an toàn cho trẻ em. Cam kết mang lại trải nghiệm mua sắm tuyệt vời cho phụ huynh và các bé.</p>
+        </div>
+  
+        <div class="footer-section">
+          <h3>Liên Hệ</h3>
+          <ul>
+            <li>📍 Địa chỉ: Số 123, Đường ABC, Quận 1, TP.HCM</li>
+            <li>📞 Hotline: <a href="#">1800.0081</a></li>
+            <li>📧 Email: <a href="#">babybear@dochoitreem.com</a></li>
+          </ul>
+        </div>
+  
+        <div class="footer-section">
+          <h3>Dịch Vụ Khách Hàng</h3>
+          <ul>
+            <li><a href="./html/csdt.html">Chính sách đổi trả</a></li>
+            <li><a href="./html/hdmh.html">Hướng dẫn mua hàng</a></li>
+            <li><a href="./html/ptth.html">Phương thức thanh toán</a></li>
+            <li><a href="./html/csbm.html">Chính sách bảo mật</a></li>
+          </ul>
+        </div>
+  
+        <div class="footer-section">
+          <h3>Theo Dõi Chúng Tôi</h3>
+          <ul class="social-links">
+            <li><a href="#"><img src="./img/FB.png" alt="Facebook"></a></li>
+            <li><a href="#"><img src="./img/ig.webp" alt="Instagram"></a></li>
+            <li class="social-linksYT"><a href="#"><img src="./img/yt.jpg" alt="YouTube"></a></li>
+          </ul>
+        </div>
+      </div>
+  
+      <div class="footer-bottom">
+        <p>&copy; 2024 Đồ Chơi Trẻ Em. Tất cả các quyền được bảo lưu.</p>
+        <p>Thiết kế bởi <a href="#">Yến Vy</a></p>
+      </div>
+    </div>
+  </footer>
+  
+</body>
+</html>

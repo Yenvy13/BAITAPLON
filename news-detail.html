@@ -1,0 +1,102 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tin Tức Chi Tiết</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <script src="./js/jquery-3.7.1.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+    }
+    .news-container {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #f9f9f9;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .news-header h1 {
+      font-size: 2.2em;
+      color: #333;
+      text-align: center;
+      margin-bottom: 15px;
+    }
+    .news-content {
+      font-size: 1.25em;
+      color: #555;
+      margin-bottom: 20px;
+    }
+    .news-content img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin-bottom: 15px;
+    }
+    .back-link {
+      display: block;
+      text-align: center;
+      margin-top: 10px;
+      font-size: 1em;
+      text-decoration: none;
+      color: #0066cc;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="news-container">
+    <div class="news-header">
+        <h1 id="news-title">Tiêu đề bài viết sẽ được hiển thị ở đây</h1>
+    </div>
+
+    <div class="news-content" id="news-content">
+    </div>
+
+    <a href="new.html" class="back-link">Quay lại trang tin tức</a>
+  </div>
+
+  <script>
+    $(document).ready(function() {
+        var urlParams = new URLSearchParams(window.location.search);
+        var id = urlParams.get('id');
+        
+        if (id == 1) {
+            $('#news-title').text('Khám Phá Bộ Sưu Tập Đồ Chơi Mới Nhất');
+            $('#news-content').html(`
+                <p>Baby Bear vừa cập nhật thêm nhiều mẫu đồ chơi 
+                hấp dẫn từ các thương hiệu nổi tiếng như LEGO, PlayDoh, 
+                và Miniforce. Bộ sưu tập mới này bao gồm những món đồ chơi 
+                sáng tạo, không chỉ giúp các bé giải trí mà còn hỗ trợ phát 
+                triển trí tuệ và kỹ năng vận động của trẻ.</p>
+
+                <img src="./img/DM2sp5.webp" alt="Đồ chơi trẻ em">
+
+                <p>Các món đồ chơi đều được lựa chọn kỹ lưỡng, 
+                đảm bảo chất lượng và an toàn cho trẻ em. 
+                Từ những mô hình lắp ráp của LEGO kích thích trí sáng tạo, 
+                đến bộ đất nặn PlayDoh giúp trẻ khám phá khả năng khéo léo 
+                của đôi tay, Baby Bear tự hào mang đến những sản phẩm phù hợp 
+                cho mọi lứa tuổi.</p>
+
+                <p>Đừng bỏ lỡ cơ hội mang về cho các bé những món đồ chơi bổ ích, thú vị, và đầy ý nghĩa này. Hãy cùng Baby Bear khám phá và chọn lựa món đồ chơi lý tưởng cho bé yêu nhà bạn!</p>
+            `);        
+        } else if (id == 2) {
+            $('#news-title').text('Ưu Đãi Đặc Biệt Nhân Dịp Lễ Cuối Năm');
+            $('#news-content').html('<p>Mùa lễ cuối năm là thời điểm tuyệt vời để mang đến cho các bé những món quà đáng yêu và ý nghĩa. Để tri ân khách hàng, Baby Bear giới thiệu chương trình ưu đãi đặc biệt với nhiều phần quà hấp dẫn và mức giảm giá sâu cho hàng loạt sản phẩm. <img src=./img/tintuc2.png>Đây là cơ hội lý tưởng để các bậc phụ huynh chọn lựa những món đồ chơi chất lượng cho con yêu, vừa giúp các bé vui chơi thoải mái, vừa khuyến khích phát triển trí tuệ.</p>');
+        } else if (id == 3) {
+            $('#news-title').text('Lời Khuyên Từ Chuyên Gia: Chọn Đồ Chơi An Toàn Cho Bé');
+            $('#news-content').html('<p>Chọn đồ chơi cho trẻ em là điều không hề dễ dàng, đặc biệt là khi yếu tố an toàn luôn phải đặt lên hàng đầu. Theo các chuyên gia, việc chọn đồ chơi phù hợp cho từng độ tuổi là cách tốt nhất để đảm bảo trẻ không gặp phải nguy cơ về sức khỏe. Đồ chơi chất lượng phải được làm từ vật liệu an toàn, không chứa chất độc hại, không có cạnh sắc nhọn và không dễ bị vỡ.</p><img src=./img/tintuc3.jpg><p>Đối với các bé dưới 3 tuổi, cha mẹ nên tránh các đồ chơi nhỏ có thể nuốt phải, và nên ưu tiên chọn sản phẩm từ các thương hiệu đáng tin cậy như Baby Bear, với cam kết về an toàn và chất lượng. Việc lựa chọn đồ chơi an toàn không chỉ giúp trẻ vui chơi mà còn tạo ra những kỷ niệm đáng nhớ trong tuổi thơ của bé.</p>'
+              
+            );
+        } else {
+            $('#news-title').text('Bài viết không tồn tại');
+            $('#news-content').html('<p>Không tìm thấy bài viết này.</p>');
+        }
+    });
+  </script>
+</body>
+</html>

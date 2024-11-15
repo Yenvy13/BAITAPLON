@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chính Sách Đổi Trả</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f6fc;
+            color: #333;
+            padding: 20px;
+            margin: 0;
+        }
+
+        .policy-container {
+            max-width: 800px;
+            margin: auto;
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 30px 20px;
+            position: relative;
+            text-align: center;
+            animation: fadeIn 1.2s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .policy-header {
+            font-size: 28px;
+            font-weight: bold;
+            color: #1E3A5F;
+            margin-bottom: 10px;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        .policy-header:after {
+            content: "";
+            width: 80px;
+            height: 3px;
+            background-color: #FFB347;
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .policy-description {
+            color: #555;
+            font-size: 16px;
+            margin: 10px 0 20px;
+            padding: 0 10px;
+            line-height: 1.5;
+        }
+
+        .icon-box {
+            font-size: 50px;
+            color: #FFB347;
+            margin-bottom: 10px;
+            animation: bounce 1s infinite alternate;
+        }
+
+        @keyframes bounce {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-10px); }
+        }
+
+        .policy-section {
+            border-bottom: 1px solid #ddd;
+            padding: 15px 0;
+            cursor: pointer;
+            position: relative;
+            margin: 5px 0;
+            transition: background 0.3s;
+        }
+
+        .policy-section:hover {
+            background: #e8f1ff;
+        }
+
+        .policy-section h3 {
+            font-size: 20px;
+            margin: 0;
+            color: #1E3A5F;
+            display: flex;
+            align-items: center;
+        }
+
+        .policy-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .policy-section.active .policy-content {
+            max-height: 200px;
+            padding-top: 10px;
+        }
+
+        .toggle-icon {
+            font-size: 18px;
+            color: #1E3A5F;
+            margin-left: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .policy-section.active .toggle-icon {
+            transform: rotate(180deg);
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #ffffff;
+            background-color: #1E3A5F;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-button:hover {
+            background-color: #FFB347;
+        }
+
+        .note {
+            background-color: #FFFAE5;
+            border-left: 4px solid #FFB347;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            color: #333;
+            line-height: 1.5;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="policy-container">
+
+        <div class="icon-box">📦</div>
+        <div class="policy-header">Chính Sách Đổi Trả</div>
+        <p class="policy-description">Chào mừng bạn đến với trang chính sách đổi trả của chúng tôi! Chúng tôi hiểu rằng đôi khi sản phẩm có thể không đáp ứng đúng mong đợi, và chúng tôi luôn sẵn sàng hỗ trợ bạn.</p>
+
+        <div class="policy-section" onclick="toggleSection(this)">
+            <h3>1. Điều kiện đổi trả <span class="toggle-icon">▼</span></h3>
+            <div class="policy-content">
+                <p>Sản phẩm chỉ được đổi trả nếu còn nguyên tem, nhãn mác và chưa qua sử dụng. Để đảm bảo quyền lợi của khách hàng, vui lòng giữ lại hóa đơn mua hàng.</p>
+            </div>
+        </div>
+
+        <div class="policy-section" onclick="toggleSection(this)">
+            <h3>2. Quy trình đổi trả <span class="toggle-icon">▼</span></h3>
+            <div class="policy-content">
+                <p>Khách hàng vui lòng liên hệ bộ phận chăm sóc khách hàng để được hướng dẫn chi tiết. Quá trình xử lý đổi trả sẽ mất từ 3-5 ngày làm việc.</p>
+            </div>
+        </div>
+
+        <div class="policy-section" onclick="toggleSection(this)">
+            <h3>3. Thời gian hoàn tiền <span class="toggle-icon">▼</span></h3>
+            <div class="policy-content">
+                <p>Sau khi xác nhận hàng hoàn lại, chúng tôi sẽ thực hiện hoàn tiền trong vòng 5-7 ngày làm việc qua phương thức thanh toán ban đầu.</p>
+            </div>
+        </div>
+
+        <div class="policy-section" onclick="toggleSection(this)">
+            <h3>4. Lưu ý đặc biệt <span class="toggle-icon">▼</span></h3>
+            <div class="policy-content">
+                <p>Chính sách đổi trả có thể thay đổi tùy theo từng loại sản phẩm. Vui lòng kiểm tra chi tiết trước khi tiến hành đổi trả.</p>
+            </div>
+        </div>
+
+        <a href="../index.html" class="back-button">Quay về trang chủ</a>
+
+        <div class="note">
+            <strong>Lưu ý:</strong> Để đảm bảo quyền lợi của mình, quý khách nên liên hệ bộ phận chăm sóc khách hàng ngay khi gặp vấn đề với sản phẩm. Chúng tôi luôn sẵn sàng hỗ trợ!
+        </div>
+    </div>
+
+    <script>
+        function toggleSection(section) {
+            section.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>

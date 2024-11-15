@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng Ký/Đăng Nhập</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .form-container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .error {
+            color: red;
+            font-size: 0.9rem;
+            margin-top: -10px;
+            margin-bottom: 10px;
+        }
+
+        .toggle-link {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .toggle-link a {
+            color: #007bff;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .toggle-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <!-- Đăng ký Form -->
+    <form id="register-form">
+        <h2>Đăng Ký Thành Viên</h2>
+        <label for="firstName">Họ và tên *</label>
+        <input type="text" id="firstName" name="firstName" required>
+        <div id="error-firstName" class="error"></div>
+
+        <label for="email">Email *</label>
+        <input type="email" id="email" name="email" required>
+        <div id="error-email" class="error"></div>
+
+        <label for="password">Mật khẩu *</label>
+        <input type="password" id="password" name="password" required>
+        <div id="error-password" class="error"></div>
+
+        <label for="confirmPassword">Nhập lại mật khẩu *</label>
+        <input type="password" id="confirmPassword" name="confirmPassword" required>
+        <div id="error-confirmPassword" class="error"></div>
+
+        <button type="submit" class="btn-primary">Đăng Ký</button>
+        <p class="toggle-link">Đã có tài khoản? <a id="show-login-form">Đăng nhập</a></p>
+    </form>
+
+    <!-- Đăng nhập Form -->
+    <form id="login-form" style="display: none;">
+        <h2>Đăng Nhập</h2>
+        <label for="loginEmail">Email *</label>
+        <input type="email" id="loginEmail" name="loginEmail" required>
+        <div id="error-loginEmail" class="error"></div>
+
+        <label for="loginPassword">Mật khẩu *</label>
+        <input type="password" id="loginPassword" name="loginPassword" required>
+        <div id="error-loginPassword" class="error"></div>
+
+        <button type="submit" class="btn-primary">Đăng Nhập</button>
+        <p class="toggle-link">Chưa có tài khoản? <a id="show-register-form">Đăng ký</a></p>
+    </form>
+</div>
+
+<script>
+    $(document).ready(function () {
+        let users = JSON.parse(localStorage.getItem('users')) || [];
+
+        $('#show-login-form').click(function () {
+            $('#register-form').hide();
+            $('#login-form').show();
+        });
+
+        $('#show-register-form').click(function () {
+            $('#login-form').hide();
+            $('#register-form').show();
+        });
+
+        $('#register-form').on('submit', function (event) {
+            event.preventDefault();
+
+            $('.error').text('');
+
+            let firstName = $('#firstName').val().trim();
+            let email = $('#email').val().trim();
+            let password = $('#password').val();
+            let confirmPassword = $('#confirmPassword').val();
+
+            let isValid = true;
+
+            if (firstName === '') {
+                $('#error-firstName').text('Họ và tên không được để trống');
+                isValid = false;
+            }
+
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (email === '') {
+                $('#error-email').text('Email không được để trống');
+                isValid = false;
+            } else if (!emailRegex.test(email)) {
+                $('#error-email').text('Email không đúng định dạng');
+                isValid = false;
+            } else if (users.some(u => u.email === email)) {
+                $('#error-email').text('Email đã được đăng ký');
+                isValid = false;
+            }
+
+            if (password.length < 6) {
+                $('#error-password').text('Mật khẩu phải có ít nhất 6 ký tự');
+                isValid = false;
+            }
+
+            if (confirmPassword !== password) {
+                $('#error-confirmPassword').text('Mật khẩu nhập lại không khớp');
+                isValid = false;
+            }
+
+            if (isValid) {
+                users.push({ name: firstName, email: email, password: password });
+                localStorage.setItem('users', JSON.stringify(users)); // Lưu vào localStorage
+
+                localStorage.setItem('loggedInUser', JSON.stringify({ email: email, password: password }));
+
+                alert('Đăng ký thành công!');
+
+                $('#register-form')[0].reset();
+
+                window.location.href = 'index.html'; 
+            }
+        });
+
+        $('#login-form').on('submit', function (event) {
+            event.preventDefault();
+
+            $('.error').text('');
+
+            let loginEmail = $('#loginEmail').val().trim();
+            let loginPassword = $('#loginPassword').val();
+
+            let user = users.find(u => u.email === loginEmail && u.password === loginPassword);
+
+            if (user) {
+                localStorage.setItem('loggedInUser', JSON.stringify({ email: loginEmail, password: loginPassword }));
+                
+                alert('Đăng nhập thành công!');
+                $('#login-form')[0].reset(); 
+                window.location.href = 'index.html';
+                $('#error-loginEmail').text('Email hoặc mật khẩu không đúng');
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Về chúng tôi</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/bootstrap.min.css">
+  <script src="./js/main.js"></script>
+  <script src="./js/jquery-3.7.1.min.js"></script>
+  <style>
+    .about-container {
+        max-width: 1200px;
+        margin: 20px auto;
+        background: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 30px;
+        animation: fadeIn 1.2s ease;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    .about-header {
+        font-size: 32px;
+        font-weight: bold;
+        color: #1E3A5F;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .about-header:after {
+        content: "";
+        display: block;
+        width: 100px;
+        height: 3px;
+        background-color: #FFB347;
+        margin: 10px auto;
+    }
+
+    .about-section {
+        margin-bottom: 30px;
+    }
+
+    .about-section h3 {
+        font-size: 24px;
+        color: #FFB347;
+        margin-bottom: 15px;
+    }
+
+    .about-section p {
+        font-size: 18px;
+        line-height: 1.6;
+    }
+
+    .contact-info {
+        margin-top: 40px;
+        text-align: center;
+    }
+
+    .contact-info p {
+        font-size: 18px;
+    }
+
+    .contact-info a {
+        font-size: 18px;
+        color: #FFB347;
+        text-decoration: none;
+    }
+
+    .contact-info a:hover {
+        text-decoration: underline;
+    }
+    
+    .about-section {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.about-section h3 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #1E3A5F;
+    margin-bottom: 15px;
+}
+
+.about-section p {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+.about-section strong {
+    font-weight: bold;
+    color: #FFB347;
+}
+
+
+</style>
+</head>
+<body>
+  <header>
+    <!--thanh thông tin trên cùng-->
+    <div class="top-bar">
+      <div class="location">
+        <span>📍 Xem tồn kho, giá bán tại:</span>
+        <select>
+          <option>Miền Bắc</option>
+          <option>Miền Trung</option>
+          <option>Miền Nam</option>
+        </select>
+      </div>
+      <div class="top-links">
+        <a href="#">Hotline: 1800.0081</a> |
+        <a href="#">Zalo cửa hàng</a> |
+        <a href="#">Ưu đãi khi tải app</a> |
+        <a href="#">Thưởng Kicoin</a>
+      </div>
+    </div>
+
+    <!--dòng chứa logo, thanh tìm kiếm, các biểu tượng-->
+    <div class="header-top">
+        <div class="logo">
+          <img src="./img/logo2.png" alt="BABY BEAR Logo">
+        </div>
+
+        <div class="search-bar">
+          <input type="text" placeholder="Ba mẹ tìm kiếm gì cho con hôm nay">
+          <button type="submit"><a></a>🔍</button>
+        </div>
+
+        <div class="header-icons">
+          <a href="#">🛍️ Lịch sử đơn hàng</a>
+          <a href="./register.html">👤 Tài khoản</a>
+          <a href="./cart.html">🛒 Giỏ hàng</a>
+        </div>
+    </div>
+
+    <!--dòng chứa menu điều hướng-->
+    <nav class="main-menu">
+      <ul>
+        <li><a href="index.html">Trang chủ</a></li>
+        <li><a href="./products.html">Sản phẩm</a></li>
+        <li><a href="./new.html">Tin tức</a></li>
+        <li><a href="./about.html">Về chúng tôi</a></li>
+        <li><a href="./hangmoi.html">Hàng mới</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="about-container">
+    <div class="about-header">
+        Về Chúng Tôi - Baby Bear
+    </div>
+
+    <div class="about-section">
+        <h3>Sứ Mệnh Của Chúng Tôi</h3>
+        <p>Baby Bear mang đến cho trẻ em một thế giới đồ chơi đầy màu sắc và bổ ích, giúp kích thích khả năng sáng tạo và phát triển kỹ năng của trẻ. Chúng tôi cam kết cung cấp các sản phẩm giáo dục, sáng tạo và an toàn, mang lại trải nghiệm tuyệt vời cho các bé và phụ huynh.</p>
+    </div>
+
+    <div class="about-section">
+        <h3>Tầm Nhìn Của Baby Bear</h3>
+        <p>Trở thành người bạn đồng hành tin cậy của các bậc phụ huynh và trẻ nhỏ trên toàn quốc, tạo nên một thế giới đồ chơi an toàn và bổ ích, giúp các bé phát triển toàn diện về trí tuệ và thể chất.</p>
+    </div>
+
+    <div class="about-section">
+        <h3>Giới Thiệu Về Baby Bear</h3>
+        <p>Được thành lập với tình yêu dành cho trẻ em và sự am hiểu về phát triển trí tuệ, Baby Bear cam kết chọn lọc và cung cấp các sản phẩm chất lượng cao, đáp ứng nhu cầu và sự mong đợi của các bậc phụ huynh. Chúng tôi luôn cố gắng mang đến một thế giới đồ chơi an toàn, sáng tạo và đầy ý nghĩa cho trẻ nhỏ.</p>
+    </div>
+
+    <div class="contact-info">
+        <h3>Liên hệ với chúng tôi</h3>
+        <p>📞 Địa chỉ: Số 123, Đường ABC, Quận 1, TP. Hồ Chí Minh</p>
+        <p>📧 Email: <a href="mailto:babybear@dochoitreem.com">babybear@dochoitreem.com</a></p>
+    </div>
+
+    <div class="about-section">
+      <h3>Thông Tin Sinh Viên Thực Hiện</h3>
+      <p><strong>Nguyễn Ngọc Yến Vy</strong></p>
+      <p>Lớp: Khoa Thương mại Du lịch - Trường Đại học Công Nghiệp TP.HCM</p>
+      <p>Chuyên ngành: Thương mại điện tử</p>
+      <p>Công việc thực hiện: Thiết kế và phát triển website Baby Bear, bao gồm tạo nội dung, xây dựng giao diện, và tối ưu hóa trải nghiệm người dùng.</p>
+    </div>
+
+</div>
+
+
+  <!--Liên hệ nhanh-->
+    <div class="quick-contact">
+      <a href="https://m.me/babybear" target="_blank" class="contact-button messenger">
+          <img src="./img/mess.png" alt="Messenger">
+      <a href="https://zalo.me/yourZaloID" target="_blank" class="contact-button zalo">
+          <img src="./img/zl.png" alt="Zalo">
+      </a>
+      <a href="https://wa.me/yourWhatsAppNumber" target="_blank" class="contact-button whatsapp">
+          <img src="./img/whatsapp.png" alt="WhatsApp">
+      </a>
+  </div>  
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-top">
+        <div class="footer-section">
+          <h3>Về Chúng Tôi</h3>
+          <p>Chúng tôi chuyên cung cấp đồ chơi giáo dục, sáng tạo và an toàn cho trẻ em. Cam kết mang lại trải nghiệm mua sắm tuyệt vời cho phụ huynh và các bé.</p>
+        </div>
+  
+        <div class="footer-section">
+          <h3>Liên Hệ</h3>
+          <ul>
+            <li>📍 Địa chỉ: Số 123, Đường ABC, Quận 1, TP.HCM</li>
+            <li>📞 Hotline: <a href="#">1800.0081</a></li>
+            <li>📧 Email: <a href="#">babybear@dochoitreem.com</a></li>
+          </ul>
+        </div>
+  
+        <div class="footer-section">
+          <h3>Dịch Vụ Khách Hàng</h3>
+          <ul>
+            <li><a href="./html/csdt.html">Chính sách đổi trả</a></li>
+            <li><a href="./html/hdmh.html">Hướng dẫn mua hàng</a></li>
+            <li><a href="./html/ptth.html">Phương thức thanh toán</a></li>
+            <li><a href="./html/csbm.html">Chính sách bảo mật</a></li>
+          </ul>
+        </div>
+  
+        <div class="footer-section">
+          <h3>Theo Dõi Chúng Tôi</h3>
+          <ul class="social-links">
+            <li><a href="#"><img src="./img/FB.png" alt="Facebook"></a></li>
+            <li><a href="#"><img src="./img/ig.webp" alt="Instagram"></a></li>
+            <li class="social-linksYT"><a href="#"><img src="./img/yt.jpg" alt="YouTube"></a></li>
+          </ul>
+        </div>
+      </div>
+  
+      <div class="footer-bottom">
+        <p>&copy; 2024 Đồ Chơi Trẻ Em. Tất cả các quyền được bảo lưu.</p>
+        <p>Thiết kế bởi <a href="#">Yến Vy</a></p>
+      </div>
+    </div>
+  </footer>
+  
+</body>
+</html>

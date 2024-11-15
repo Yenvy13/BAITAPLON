@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hướng Dẫn Mua Hàng</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f6fc;
+            color: #333;
+            padding: 20px;
+            margin: 0;
+        }
+
+        .guide-container {
+            max-width: 800px;
+            margin: auto;
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 30px 20px;
+            position: relative;
+            text-align: center;
+            animation: fadeIn 1.2s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .guide-header {
+            font-size: 28px;
+            font-weight: bold;
+            color: #1E3A5F;
+            margin-bottom: 10px;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        .guide-header:after {
+            content: "";
+            width: 80px;
+            height: 3px;
+            background-color: #FFB347;
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .guide-description {
+            color: #555;
+            font-size: 16px;
+            margin: 10px 0 20px;
+            padding: 0 10px;
+            line-height: 1.5;
+        }
+
+        .step {
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+            padding: 20px 0;
+            display: flex;
+            align-items: center;
+            transition: background 0.3s;
+        }
+
+        .step:hover {
+            background-color: #e8f1ff;
+        }
+
+        .step-icon {
+            font-size: 30px;
+            color: #FFB347;
+            margin-right: 15px;
+            animation: bounce 1s infinite alternate;
+        }
+
+        .step-title {
+            font-size: 20px;
+            color: #1E3A5F;
+            margin: 0 0 5px;
+        }
+
+        .step-description {
+            color: #555;
+            font-size: 16px;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #ffffff;
+            background-color: #1E3A5F;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-button:hover {
+            background-color: #FFB347;
+        }
+
+        .note {
+            background-color: #FFFAE5;
+            border-left: 4px solid #FFB347;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            color: #333;
+            line-height: 1.5;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="guide-container">
+        <div class="guide-header">Hướng Dẫn Mua Hàng</div>
+        <p class="guide-description">Dưới đây là các bước mua hàng dễ dàng tại cửa hàng của chúng tôi. Chỉ cần làm theo từng bước là bạn có thể hoàn thành đơn hàng nhanh chóng!</p>
+
+        <div class="step">
+            <div class="step-icon">🛒</div>
+            <div>
+                <h3 class="step-title">Bước 1: Chọn sản phẩm</h3>
+                <p class="step-description">Duyệt qua các danh mục và chọn sản phẩm bạn muốn mua. Bạn có thể xem chi tiết từng sản phẩm và thêm vào giỏ hàng.</p>
+            </div>
+        </div>
+
+        <div class="step">
+            <div class="step-icon">🧾</div>
+            <div>
+                <h3 class="step-title">Bước 2: Kiểm tra giỏ hàng</h3>
+                <p class="step-description">Sau khi chọn xong, vào giỏ hàng để kiểm tra lại các sản phẩm, số lượng, và giá tiền trước khi tiến hành thanh toán.</p>
+            </div>
+        </div>
+
+        <div class="step">
+            <div class="step-icon">📑</div>
+            <div>
+                <h3 class="step-title">Bước 3: Nhập thông tin giao hàng</h3>
+                <p class="step-description">Điền đầy đủ thông tin người nhận bao gồm địa chỉ, số điện thoại, và các ghi chú đặc biệt (nếu có) để chúng tôi xử lý đơn hàng chính xác.</p>
+            </div>
+        </div>
+
+        <div class="step">
+            <div class="step-icon">💳</div>
+            <div>
+                <h3 class="step-title">Bước 4: Chọn phương thức thanh toán</h3>
+                <p class="step-description">Lựa chọn phương thức thanh toán phù hợp: thanh toán khi nhận hàng hoặc thanh toán trực tuyến để hoàn tất đơn hàng.</p>
+            </div>
+        </div>
+
+        <div class="step">
+            <div class="step-icon">📦</div>
+            <div>
+                <h3 class="step-title">Bước 5: Xác nhận và nhận hàng</h3>
+                <p class="step-description">Sau khi đơn hàng được xác nhận, sản phẩm sẽ được chuẩn bị và giao tới địa chỉ của bạn trong thời gian sớm nhất.</p>
+            </div>
+        </div>
+
+        <a href="../index.html" class="back-button">Quay về trang chủ</a>
+
+        <div class="note">
+            <strong>Lưu ý:</strong> Nếu có bất kỳ thắc mắc nào trong quá trình mua hàng, hãy liên hệ bộ phận chăm sóc khách hàng của chúng tôi để được hỗ trợ nhanh chóng và tận tình!
+        </div>
+    </div>
+</body>
+</html>

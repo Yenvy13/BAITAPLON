@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phương Thức Thanh Toán</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f6fc;
+            color: #333;
+            padding: 20px;
+            margin: 0;
+        }
+
+        .payment-container {
+            max-width: 800px;
+            margin: auto;
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 30px 20px;
+            text-align: center;
+            animation: fadeIn 1.2s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .payment-header {
+            font-size: 28px;
+            font-weight: bold;
+            color: #1E3A5F;
+            margin-bottom: 10px;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        .payment-header:after {
+            content: "";
+            width: 80px;
+            height: 3px;
+            background-color: #FFB347;
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .payment-description {
+            color: #555;
+            font-size: 16px;
+            margin: 10px 0 20px;
+            padding: 0 10px;
+            line-height: 1.5;
+        }
+
+        .method {
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+            padding: 20px 0;
+            display: flex;
+            align-items: center;
+            transition: background 0.3s;
+        }
+
+        .method:hover {
+            background-color: #e8f1ff;
+        }
+
+        .method-icon {
+            font-size: 30px;
+            color: #FFB347;
+            margin-right: 15px;
+        }
+
+        .method-title {
+            font-size: 20px;
+            color: #1E3A5F;
+            margin: 0 0 5px;
+        }
+
+        .method-description {
+            color: #555;
+            font-size: 16px;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #ffffff;
+            background-color: #1E3A5F;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-button:hover {
+            background-color: #FFB347;
+        }
+
+        .note {
+            background-color: #FFFAE5;
+            border-left: 4px solid #FFB347;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            color: #333;
+            line-height: 1.5;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="payment-container">
+        <div class="payment-header">Phương Thức Thanh Toán</div>
+        <p class="payment-description">Chúng tôi cung cấp các phương thức thanh toán linh hoạt, an toàn và tiện lợi để bạn có thể hoàn tất đơn hàng một cách dễ dàng nhất.</p>
+
+        <div class="method">
+            <div class="method-icon">💵</div>
+            <div>
+                <h3 class="method-title">Thanh toán khi nhận hàng (COD)</h3>
+                <p class="method-description">Bạn có thể chọn thanh toán trực tiếp cho nhân viên giao hàng khi nhận sản phẩm. Hình thức này tiện lợi và đảm bảo an toàn cho khách hàng.</p>
+            </div>
+        </div>
+
+        <div class="method">
+            <div class="method-icon">💳</div>
+            <div>
+                <h3 class="method-title">Thẻ tín dụng/Thẻ ghi nợ</h3>
+                <p class="method-description">Chúng tôi chấp nhận thanh toán qua các loại thẻ tín dụng và thẻ ghi nợ của các ngân hàng lớn. Hệ thống bảo mật của chúng tôi sẽ đảm bảo an toàn cho thông tin của bạn.</p>
+            </div>
+        </div>
+
+        <div class="method">
+            <div class="method-icon">🏦</div>
+            <div>
+                <h3 class="method-title">Chuyển khoản ngân hàng</h3>
+                <p class="method-description">Bạn có thể thanh toán qua chuyển khoản ngân hàng. Vui lòng ghi rõ mã đơn hàng trong nội dung chuyển khoản để chúng tôi xử lý nhanh chóng.</p>
+            </div>
+        </div>
+
+        <div class="method">
+            <div class="method-icon">🌐</div>
+            <div>
+                <h3 class="method-title">Ví điện tử</h3>
+                <p class="method-description">Chúng tôi chấp nhận thanh toán qua các ví điện tử phổ biến như Momo, ZaloPay, và VNPay, giúp bạn thanh toán một cách tiện lợi và nhanh chóng.</p>
+            </div>
+        </div>
+
+        <a href="../index.html" class="back-button">Quay về trang chủ</a>
+
+        <div class="note">
+            <strong>Lưu ý:</strong> Mọi thanh toán đều được xử lý bảo mật. Nếu có bất kỳ thắc mắc nào, vui lòng liên hệ với chúng tôi để được hỗ trợ.
+        </div>
+    </div>
+</body>
+</html>

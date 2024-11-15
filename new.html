@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tin Tức</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/bootstrap.min.css">
+  <script src="./js/main.js"></script>
+  <script src="./js/jquery-3.7.1.min.js"></script>
+  <style>
+    .news-container {
+        max-width: 1200px;
+        margin: 30px auto;
+        background: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 30px;
+        animation: fadeIn 1.2s ease;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    .news-header {
+        font-size: 32px;
+        font-weight: bold;
+        color: #1E3A5F;
+        margin-bottom: 10px;
+        text-align: center;
+        position: relative;
+    }
+
+    .news-header:after {
+        content: "";
+        display: block;
+        width: 100px;
+        height: 3px;
+        background-color: #FFB347;
+        margin: 10px auto;
+    }
+
+    .news-header img {
+        width: 160px;
+        position: absolute;
+        top: -20px;
+        right: -70px;
+        animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+        0%, 100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-10px);
+        }
+    }
+
+    .news-grid {
+        display: flex;
+        gap: 20px;
+    }
+
+    .news-item {
+        margin-bottom: 20px;
+        padding: 15px;
+        border: 1px solid #ddd;
+        transition: background 0.3s;
+        flex: 1;
+    }
+
+    .news-item:hover {
+        background-color: #e8f1ff;
+    }
+
+    .news-title {
+        font-size: 22px;
+        color: #1E3A5F;
+        margin: 0 0 10px;
+    }
+
+    .news-excerpt {
+        color: #555;
+        font-size: 16px;
+        line-height: 1.6;
+    }
+
+    .read-more {
+        color: #FFB347;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .read-more:hover {
+        text-decoration: underline;
+    }
+
+    .newsletter-signup {
+        background-color: #FFFAE5;
+        padding: 20px;
+        margin-top: 40px;
+        text-align: center;
+        border-radius: 5px;
+    }
+
+    .newsletter-signup input {
+        padding: 10px;
+        width: 250px;
+        margin-right: 10px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+    }
+
+    .newsletter-signup button {
+        padding: 10px 20px;
+        background-color: #FFB347;
+        border: none;
+        color: white;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    .newsletter-signup button:hover {
+        background-color: #ff9a21;
+    }
+
+    .newsletter-signup .error {
+        color: red;
+        font-size: 14px;
+        margin-top: 10px;
+    }
+
+    /* Quảng Cáo Thanh Bên */
+    .promo-sidebar {
+        position: fixed;
+        right: 20px;
+        top: 20px;
+        background-color: #e8f1ff;
+        padding: 20px;
+        border-radius: 5px;
+        width: 250px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .promo-sidebar h3 {
+        color:   #ff9a21;
+        margin-bottom: 10px;
+    }
+
+    .promo-sidebar p {
+        color:  #1E3A5F;
+    }
+
+    .promo-sidebar .promo-link {
+        color:  #1E3A5F;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .promo-sidebar .promo-link:hover {
+        text-decoration: underline;
+    }
+
+    .promo-close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        color: #1E3A5F;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    .recommended-products {
+        margin-top: 40px;
+    }
+
+    .recommended-products h3 {
+        text-align: center;
+        color: #1E3A5F;
+        font-size: 30px;
+    }
+
+    .product-grid {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+    }
+
+    .product-item {
+        width: 30%;
+        text-align: center;
+    }
+
+    .product-item img {
+        width: 100%;
+        border-radius: 8px;
+    }
+
+    .view-details {
+        color: #FFB347;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .view-details:hover {
+        text-decoration: underline;
+    }
+    
+     /* Đánh giá khách hàng */
+     .customer-reviews {
+        margin-top: 40px;
+        padding: 20px;
+        background-color: #e8f1ff;
+        border-radius: 5px;
+    }
+
+    .customer-reviews h3 {
+        text-align: center;
+        color: #1E3A5F;
+    }
+
+    .review-item {
+        margin-bottom: 10px;
+        font-style: italic;
+        text-align: center;
+    }
+  
+  </style>
+</head>
+<body>
+  <header>
+    <!--thanh thông tin trên cùng-->
+    <div class="top-bar">
+      <div class="location">
+        <span>📍 Xem tồn kho, giá bán tại:</span>
+        <select>
+          <option>Miền Bắc</option>
+          <option>Miền Trung</option>
+          <option>Miền Nam</option>
+        </select>
+      </div>
+      <div class="top-links">
+        <a href="#">Hotline: 1800.0081</a> |
+        <a href="#">Zalo cửa hàng</a> |
+        <a href="#">Ưu đãi khi tải app</a> |
+        <a href="#">Thưởng Kicoin</a>
+      </div>
+    </div>
+
+    <!--dòng chứa logo, thanh tìm kiếm, các biểu tượng-->
+    <div class="header-top">
+        <div class="logo">
+          <img src="./img/logo2.png" alt="BABY BEAR Logo">
+        </div>
+
+        <div class="search-bar">
+          <input type="text" placeholder="Ba mẹ tìm kiếm gì cho con hôm nay">
+          <button type="submit"><a></a>🔍</button>
+        </div>
+
+        <div class="header-icons">
+          <a href="#">🛍️ Lịch sử đơn hàng</a>
+          <a href="./register.html">👤 Tài khoản</a>
+          <a href="./cart.html">🛒 Giỏ hàng</a>
+        </div>
+    </div>
+
+    <!--dòng chứa menu điều hướng-->
+    <nav class="main-menu">
+      <ul>
+        <li><a href="index.html">Trang chủ</a></li>
+        <li><a href="./products.html">Sản phẩm</a></li>
+        <li><a href="./new.html">Tin tức</a></li>
+        <li><a href="./about.html">Về chúng tôi</a></li>
+        <li><a href="./hangmoi.html">Hàng mới</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="news-container">
+    <div class="news-header">
+        Tin Tức Mới Nhất
+        <img src="./img/icontintuc.png" alt="Bear Dancing" class="bear-image">
+    </div>
+
+    <div class="news-grid">
+        <div class="news-item">
+            <h2 class="news-title">Khám Phá Bộ Sưu Tập Đồ Chơi Mới Nhất</h2>
+            <img src="./img/DM2sp5.webp" alt="Bộ Sưu Tập Đồ Chơi" style="width:100%; border-radius: 8px; margin-bottom: 10px;">
+            <p class="news-excerpt">Baby Bear vừa cập nhật thêm nhiều mẫu đồ chơi hấp dẫn từ các thương hiệu nổi tiếng như LEGO, PlayDoh, và Miniforce. Đừng bỏ lỡ cơ hội mang niềm vui về cho các bé...</p>
+            <a href="./news-detail.html?id=1" class="read-more">Xem thêm →</a>
+        </div>
+        <div class="news-item">
+            <h2 class="news-title">Ưu Đãi Đặc Biệt Nhân Dịp Lễ Cuối Năm</h2>
+            <img src="./img/tintuc2.png" alt="Ưu Đãi Đặc Biệt" style="width:100%; border-radius: 8px; margin-bottom: 10px;">
+            <p class="news-excerpt">Nhân dịp lễ cuối năm, Baby Bear mang đến chương trình giảm giá lên đến 50% cho tất cả sản phẩm. Đây là cơ hội để các bậc phụ huynh sắm quà tặng cho con yêu...</p>
+            <a href="./news-detail.html?id=2" class="read-more">Xem thêm →</a>
+        </div>
+        <div class="news-item">
+            <h2 class="news-title">Lời Khuyên Từ Chuyên Gia: Chọn Đồ Chơi An Toàn Cho Bé</h2>
+            <img src="./img/tintuc3.jpg" alt="Lời Khuyên Chuyên Gia" style="width:100%; border-radius: 8px; margin-bottom: 10px;">
+            <p class="news-excerpt">Đồ chơi không chỉ là nguồn vui chơi giải trí mà còn giúp bé phát triển kỹ năng, tư duy. Tuy nhiên, việc chọn đồ chơi an toàn là vô cùng quan trọng...</p>
+            <a href="./news-detail.html?id=3" class="read-more">Xem thêm →</a>
+        </div>
+    </div>
+
+    <!-- Đăng Ký Nhận Tin -->
+    <div class="newsletter-signup">
+        <h3>Đăng Ký Nhận Tin Mới</h3>
+        <p>Đừng bỏ lỡ bất kỳ ưu đãi nào từ Baby Bear. Đăng ký ngay để nhận những thông báo đặc biệt!</p>
+        <input type="email" placeholder="Nhập email của bạn" id="email" />
+        <button type="button" onclick="validateEmail()">Đăng Ký</button>
+        <p class="error" id="error-message"></p>
+    </div>
+
+    <div class="customer-reviews">
+        <h3>Khách Hàng Nói Gì Về Baby Bear?</h3>
+        <div class="review-item">
+            <p>"Chất lượng đồ chơi rất tuyệt vời và an toàn cho bé. Tôi rất hài lòng với sản phẩm từ Baby Bear!" - Minh Anh</p>
+        </div>
+        <div class="review-item">
+            <p>"Dịch vụ chăm sóc khách hàng rất chu đáo. Tôi luôn tin tưởng khi mua sắm tại đây." - Lan Phương</p>
+        </div>
+    </div>
+
+    <!-- Gợi Ý Các Sản Phẩm Phụ Huynh Tin Dùng -->
+    <div class="recommended-products">
+        <h3>Sản Phẩm Phụ Huynh Tin Dùng</h3>
+        <div class="product-grid">
+            <div class="product-item">
+                <img src="./img/DM1sp2.webp" alt="Product 1">
+                <h4>Đồ Chơi LEGO</h4>
+                <p>Giá: 350,000 VNĐ</p>
+                <a href="#" class="view-details">Xem Chi Tiết</a>
+            </div>
+            <div class="product-item">
+                <img src="./img/DM4sp1.webp" alt="Product 2">
+                <h4>Đồ Chơi Miniforce</h4>
+                <p>Giá: 250,000 VNĐ</p>
+                <a href="#" class="view-details">Xem Chi Tiết</a>
+            </div>
+            <div class="product-item">
+                <img src="./img/sp5.webp" alt="Product 3">
+                <h4>Đồ Chơi PlayDoh</h4>
+                <p>Giá: 180,000 VNĐ</p>
+                <a href="#" class="view-details">Xem Chi Tiết</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Quảng Cáo Thanh Bên -->
+<div class="promo-sidebar">
+    <h3>Giảm Giá 50%</h3>
+    <p>Chỉ trong tuần này, giảm giá lên đến 50% cho tất cả đồ chơi!</p>
+    <a href="#" class="promo-link">Xem chi tiết</a>
+    <span class="promo-close" onclick="closePromo()">X</span>
+</div>
+
+<script>
+    function validateEmail() {
+        var email = document.getElementById('email').value;
+        var errorMessage = document.getElementById('error-message');
+        var regex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+
+        if (!regex.test(email)) {
+            errorMessage.textContent = "Vui lòng nhập email hợp lệ với @gmail.com";
+        } else {
+            errorMessage.textContent = "";
+            alert("Đăng ký thành công!");
+        }
+    }
+
+    function closePromo() {
+        document.querySelector('.promo-sidebar').style.display = 'none';
+    }
+</script>
+
+<!--Liên hệ nhanh-->
+    <div class="quick-contact">
+      <a href="https://m.me/babybear" target="_blank" class="contact-button messenger">
+          <img src="./img/mess.png" alt="Messenger">
+      <a href="https://zalo.me/yourZaloID" target="_blank" class="contact-button zalo">
+          <img src="./img/zl.png" alt="Zalo">
+      </a>
+      <a href="https://wa.me/yourWhatsAppNumber" target="_blank" class="contact-button whatsapp">
+          <img src="./img/whatsapp.png" alt="WhatsApp">
+      </a>
+  </div>  
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-top">
+        <div class="footer-section">
+          <h3>Về Chúng Tôi</h3>
+          <p>Chúng tôi chuyên cung cấp đồ chơi giáo dục, sáng tạo và an toàn cho trẻ em. Cam kết mang lại trải nghiệm mua sắm tuyệt vời cho phụ huynh và các bé.</p>
+        </div>
+  
+        <div class="footer-section">
+          <h3>Liên Hệ</h3>
+          <ul>
+            <li>📍 Địa chỉ: Số 123, Đường ABC, Quận 1, TP.HCM</li>
+            <li>📞 Hotline: <a href="#">1800.0081</a></li>
+            <li>📧 Email: <a href="#">babybear@dochoitreem.com</a></li>
+          </ul>
+        </div>
+  
+        <div class="footer-section">
+          <h3>Dịch Vụ Khách Hàng</h3>
+          <ul>
+            <li><a href="./html/csdt.html">Chính sách đổi trả</a></li>
+            <li><a href="./html/hdmh.html">Hướng dẫn mua hàng</a></li>
+            <li><a href="./html/ptth.html">Phương thức thanh toán</a></li>
+            <li><a href="./html/csbm.html">Chính sách bảo mật</a></li>
+          </ul>
+        </div>
+  
+        <div class="footer-section">
+          <h3>Theo Dõi Chúng Tôi</h3>
+          <ul class="social-links">
+            <li><a href="#"><img src="./img/FB.png" alt="Facebook"></a></li>
+            <li><a href="#"><img src="./img/ig.webp" alt="Instagram"></a></li>
+            <li class="social-linksYT"><a href="#"><img src="./img/yt.jpg" alt="YouTube"></a></li>
+          </ul>
+        </div>
+      </div>
+  
+      <div class="footer-bottom">
+        <p>&copy; 2024 Đồ Chơi Trẻ Em. Tất cả các quyền được bảo lưu.</p>
+        <p>Thiết kế bởi <a href="#">Yến Vy</a></p>
+      </div>
+    </div>
+  </footer>
+  
+</body>
+</html>

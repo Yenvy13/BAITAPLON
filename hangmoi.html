@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hàng Mới</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f6fc;
+            color: #333;
+            padding: 0 50px;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 10px;
+        }
+
+        h1 {
+            font-size: 36px;
+            color: #1E3A5F;
+            text-align: center;
+            margin: 0px;
+            position: relative;
+            animation: fadeIn 1.5s ease;
+        }
+
+        h1::after {
+            content: "";
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: #FFB347;
+            margin: 10px auto 0;
+        }
+
+        .product-card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            margin: 20px;
+            width: 300px;
+            float: left;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .product-image {
+            width: 80%;
+            height: auto;
+            border-radius: 8px;
+            animation: bounce 1s infinite alternate;
+        }
+
+        @keyframes bounce {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-5px); }
+        }
+
+        .product-name {
+            font-size: 22px;
+            font-weight: bold;
+            color: #1E3A5F;
+            margin: 15px 0;
+        }
+
+        .product-description {
+            font-size: 16px;
+            color: #555;
+            margin: 10px 0;
+            line-height: 1.5;
+        }
+
+        .product-price {
+            font-size: 20px;
+            color: #FF6B6B;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .buy-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #1E3A5F;
+            color: #fff;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .buy-button:hover {
+            background-color: #FFB347;
+        }
+
+        .button-container {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 20px;
+        }
+
+       .back-button {
+       text-decoration: none;
+       color: #ffffff;
+       background-color: #1E3A5F;
+       padding: 10px 20px;
+       border-radius: 5px;
+       transition: background-color 0.3s ease;
+       }
+
+      .back-button:hover {
+      background-color: #FFB347;
+      }
+
+    </style>
+</head>
+<body>
+    <div class="button-container">
+        <a href="./index.html" class="back-button">Quay về trang chủ</a>
+    </div>
+    
+    <div class="container">
+        <h1>Sản Phẩm Mới Nhất</h1>
+
+        <div class="product-card">
+            <img src="./img/hm1.webp" alt="Sản phẩm 1" class="product-image">
+            <div class="product-name">Đồ Chơi Trẻ Em Xếp Hình 3D Nat Geo: Đền Taj Mahal Puzzles DS0981H</div>
+            <div class="product-description">MĐồ Chơi Trẻ Em Xếp Hình 3D Nat Geo: Đền Taj Mahal Puzzles DS0981H</div>
+            <div class="product-price">219,000₫</div>
+            <a href="#" class="buy-button">Mua Ngay</a>
+        </div>
+
+        <div class="product-card">
+            <img src="./img/hm2.webp" alt="Sản phẩm 2" class="product-image">
+            <div class="product-name">Robot Biến Hình Cỡ Lớn Taki SUPERWINGS YW780258</div>
+            <div class="product-description">Đồ Chơi Robot Biến Hình Cỡ Lớn Taki SUPERWINGS YW780258 </div>
+            <div class="product-price">150,000₫</div>
+            <a href="#" class="buy-button">Mua Ngay</a>
+        </div>
+
+        <div class="product-card">
+            <img src="./img/hm3.webp" alt="Sản phẩm 3" class="product-image">
+            <div class="product-name">Đồ Chơi Dẻo Trò Chơi Con Mực Series 1 SQUID GAME SG10216</div>
+            <div class="product-description">Đồ Chơi Dẻo Trò Chơi Con Mực Series 1 SQUID GAME S1/SG10216</div>
+            <div class="product-price">99.000₫</div>
+            <a href="#" class="buy-button">Mua Ngay</a>
+        </div>
+
+    </div>
+</body>
+</html>
